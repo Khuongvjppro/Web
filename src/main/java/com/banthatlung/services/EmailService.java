@@ -9,8 +9,8 @@ public class EmailService {
 
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
-    private static final String SMTP_USERNAME = "dungbui19304@gmail.com"; // Thay bằng email của bạn
-    private static final String SMTP_PASSWORD = "uosy oyea kqjt cgjo"; // Thay bằng mật khẩu ứng dụng của bạn
+    private static final String SMTP_USERNAME = "22130129@st.hcmuaf.edu.vn"; // Thay bằng email của bạn
+    private static final String SMTP_PASSWORD = "abya hlec fzus bcci"; // Thay bằng mật khẩu ứng dụng của bạn
 
     public void sendMail(String recipientEmail, String subject, String body) throws MessagingException {
         // Cấu hình các thuộc tính SMTP

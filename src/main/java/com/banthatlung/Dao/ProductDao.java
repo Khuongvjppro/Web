@@ -183,15 +183,15 @@ public class ProductDao {
         }
     }
 
-    public void addProduct(Product product) {
+    public boolean addProduct(Product product) {
         String sql = " INSERT INTO products (name, price, description, status, quantity, image, category_id, brand_id, material_id) VALUES (? , ?, ?, ?, ?, ?, ?, ?, ?) ";
         try (PreparedStatement ps = DBConnect2.getPreparedStatement(sql)) {
             setProductParameters(ps, product);
-            ps.executeUpdate();
-            System.out.println("Product added successfully!");
+            int rowsInserted= ps.executeUpdate();
+            return rowsInserted > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Failed to add product.");
+            return false;
         }
     }
 
