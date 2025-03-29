@@ -40,5 +40,13 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/View/Login.jsp").forward(req, resp);
     }
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String code = request.getParameter("code");
+        GoogleLogin gg = new GoogleLogin();
+        String accessToken = gg.getToken(code);
+        GoogleAccount acc = gg.getUserInfo(accessToken);
+        System.out.println(acc);
+    }
 }
 

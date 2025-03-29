@@ -5,15 +5,17 @@
   Time: 10:31 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <title>Đăng nhập</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <style>
@@ -30,6 +32,7 @@
             margin: 0;
             padding: 0;
         }
+
         .login-container {
             display: flex;
             justify-content: space-around;
@@ -140,7 +143,8 @@
                         <a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
                     </div>
                 </div>
-                <a href=${pageContext.request.contextPath}/Cart?action=showCart><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href=${pageContext.request.contextPath}/Cart?action=showCart><i
+                        class="fa-solid fa-cart-shopping"></i></a>
             </c:if>
         </div>
     </div>
@@ -160,7 +164,7 @@
             </c:if>
 
             <form action="${pageContext.request.contextPath}/login" method="post">
-                <label for="email">Tên tài khỏan</label>
+                <label for="email">Tên tài khoản</label>
                 <input type="text" id="email" name="uname" required>
 
                 <label for="password">Mật khẩu</label>
@@ -169,6 +173,20 @@
                 <a href="${pageContext.request.contextPath}/forgot-password" class="forgot-password">Quên mật khẩu?</a>
                 <button type="submit" class="btn">Đăng nhập</button>
             </form>
+            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=http://localhost:8080/projectl_war_exploded/login&response_type=code&client_id=911076308152-ecrt2m1eksasdgf9dqqug578lqk2j5p7.apps.googleusercontent.com&approval _prompt=force"
+               style="display: inline-flex; align-items: center;
+               padding: 10px 20px; background-color: #ffffff;
+               color: #000000; text-decoration: none;
+               border-radius: 4px; font-weight: bold;
+               border: 1px solid #e0e0e0;
+               box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
+                     alt="Google logo"
+                     style="width: 20px; height: 20px; margin-right: 10px;">
+                Đăng nhập với Google
+            </a>
+
+
         </div>
 
         <div class="section">
@@ -196,7 +214,7 @@
 <footer class="footer">
     <div class="footer-brand">
         <p>CHUYÊN CUNG CẤP CÁC LOẠI THẮT LƯNG.</p>
-        <p>   Chất lượng - Uy tín - Tin cậy</p>
+        <p> Chất lượng - Uy tín - Tin cậy</p>
         <div class="social-icons">
             <a href="https://www.facebook.com" target="_blank">
                 <img src="../asset/image/icons8-facebook-48.png" alt="Facebook">
