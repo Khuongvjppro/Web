@@ -25,9 +25,9 @@
         <!-- Menu điều hướng -->
         <div class="menu d-flex">
             <a href="${pageContext.request.contextPath}/home" class="text-white mx-3">Danh mục sản phẩm</a>
-            <a href="#" class="text-white mx-3">Giới thiệu</a>
-            <a href="#" class="text-white mx-3">Chính sách</a>
-            <a href="#" class="text-white mx-3">Liên hệ</a>
+            <a href="${pageContext.request.contextPath}/about" class="text-white mx-3">Giới thiệu</a>
+            <a href="${pageContext.request.contextPath}/policy" class="text-white mx-3">Chính sách</a>
+            <a href="${pageContext.request.contextPath}/contact" class="text-white mx-3">Liên hệ</a>
         </div>
 
 
@@ -65,7 +65,9 @@
 
     </div>
 </header>
-
+<!---Start TaggoAI--->
+<script async data-taggo-botid="67e8452738ab1a31880dfc7d" src="https://widget.taggo.chat/v2.js"></script>
+<!---End TaggoAI--->
 <section id="feature" class="container py-5">
     <div class="row text-center">
         <div class="col-md-2">
