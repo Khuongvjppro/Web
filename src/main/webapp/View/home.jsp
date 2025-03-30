@@ -222,17 +222,13 @@
 
         <!-- Thông tin bản quyền -->
         <div class="footer-bottom text-center">
-            <p>&copy; 2024 Chuyên cung cấp thắt lưng các loại. Hotline: <a href="tel:0397526965" class="text-white">0397526965</a></p>
+            <p>&copy; 2025 Chuyên cung cấp thắt lưng các loại. Hotline: <a href="tel:+123 456 768" class="text-white">0397526965</a></p>
         </div>
     </div>
 </footer>
 
-
-
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
