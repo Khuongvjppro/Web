@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Registry extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/register.jsp").forward(req, resp);
+        req.getRequestDispatcher("/View/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Registry extends HttpServlet {
 
         if (!pwd.equals(cpwd)) {
             req.setAttribute("error", "Mật khẩu không khớp");
-            req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/View/register.jsp").forward(req, resp);
             return;
         }
 
@@ -45,7 +45,7 @@ public class Registry extends HttpServlet {
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
         } else {
             req.setAttribute("error", "Tên tài khoản đã tồn tại");
-            req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/View/register.jsp").forward(req, resp);
         }
     }
 }

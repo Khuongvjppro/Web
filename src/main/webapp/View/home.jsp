@@ -24,10 +24,10 @@
 
         <!-- Menu điều hướng -->
         <div class="menu d-flex">
-            <a href="${pageContext.request.contextPath}/home" class="text-white mx-3">Danh mục sản phẩm</a>
-            <a href="${pageContext.request.contextPath}/about" class="text-white mx-3">Giới thiệu</a>
-            <a href="${pageContext.request.contextPath}/policy" class="text-white mx-3">Chính sách</a>
-            <a href="${pageContext.request.contextPath}/contact" class="text-white mx-3">Liên hệ</a>
+            <a href="${pageContext.request.contextPath}/home" class="text-white">Danh mục sản phẩm</a>
+            <a href="${pageContext.request.contextPath}/aboutUs" class="text-white">Giới thiệu</a>
+            <a href="${pageContext.request.contextPath}/policy" class="text-white">Chính sách</a>
+            <a href="${pageContext.request.contextPath}/contactUs" class="text-white">Liên hệ</a>
         </div>
 
 

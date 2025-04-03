@@ -3,36 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
-    <servlet>
-        <servlet-name>AboutServlet</servlet-name>
-        <jsp-file>/about.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AboutServlet</servlet-name>
-        <url-pattern>/about</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>PolicyServlet</servlet-name>
-        <jsp-file>/policy.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>PolicyServlet</servlet-name>
-        <url-pattern>/policy</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ContactServlet</servlet-name>
-        <jsp-file>/contact.jsp</jsp-file>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ContactServlet</servlet-name>
-        <url-pattern>/contact</url-pattern>
-    </servlet-mapping>
-
 </web-app>
 
 
