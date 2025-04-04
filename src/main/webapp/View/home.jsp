@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
 <!--Header-->
@@ -154,6 +155,22 @@
             <button class="btn btn-outline-primary mx-1 my-2" onclick="window.location.href='${pageContext.request.contextPath}/home?page=${i}'">${i}</button>
         </c:forEach>
     </div>
+    <%
+        String added = request.getParameter("added");
+        if ("success".equals(added)) {
+    %>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Thêm vào giỏ hàng thành công!',
+            text: 'Sản phẩm đã được thêm vào giỏ hàng.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#3085d6'
+        });
+    </script>
+    <%
+        }
+    %>
 
 </section>
 
