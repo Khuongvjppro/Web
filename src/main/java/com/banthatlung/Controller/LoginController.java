@@ -48,5 +48,14 @@ public class LoginController extends HttpServlet {
         GoogleAccount acc = gg.getUserInfo(accessToken);
         System.out.println(acc);
     }
+    protected void proccessRequest2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String code = request.getParameter("code");
+        System.out.println(code);
+        FacebookLogin FB = new FacebookLogin();
+        String accessToken = FB.getToken(code);
+        System.out.println(accessToken);
+        FacebookAccount acc = FB.getUserInfo(accessToken);
+        System.out.println(acc);
+    }
 }
 
