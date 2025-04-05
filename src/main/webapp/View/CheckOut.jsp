@@ -104,10 +104,21 @@
                     <label for="phone" class="form-label">SDT</label>
                     <input type="text" name="phone" class="form-control" id="phone" placeholder="Mô tả">
                 </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Địa chỉ</label>
-                    <input type="text" name="address" class="form-control" id="address" placeholder="Mô tả">
+                <div class="form-group">
+                    <label for="province">Tỉnh/Thành phố</label>
+                    <select id="province" class="form-control"></select>
                 </div>
+
+                <div class="form-group">
+                    <label for="district">Quận/Huyện</label>
+                    <select id="district" class="form-control"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ward">Phường/Xã</label>
+                    <select id="ward" class="form-control"></select>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
@@ -190,5 +201,22 @@
         <p>&copy; 2024 Chuyên cung cấp thắt lưng các loại. Hotline: <a href="tel:0397526965">0397526965</a></p>
     </div>
 </footer>
+<script>
+    window.onload = function () {
+        fetch("/projectltw/api/location?type=province")
+            .then(response => response.json())
+            .then(data => {
+                const select = document.createElement("select");
+                select.name = "province";
+                data.forEach(province => {
+                    const opt = document.createElement("option");
+                    opt.value = province.code;
+                    opt.textContent = province.name;
+                    select.appendChild(opt);
+                });
+                document.querySelector(".payment-form form").insertBefore(select, document.getElementById("address"));
+            });
+    };
+</script>
 </body>
 </html>
