@@ -104,10 +104,21 @@
                     <label for="phone" class="form-label">SDT</label>
                     <input type="text" name="phone" class="form-control" id="phone" placeholder="Mô tả">
                 </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Địa chỉ</label>
-                    <input type="text" name="address" class="form-control" id="address" placeholder="Mô tả">
+                <div class="form-group">
+                    <label for="province">Tỉnh/Thành phố</label>
+                    <select id="province" name="province" class="form-control"></select>
                 </div>
+
+                <div class="form-group">
+                    <label for="district">Quận/Huyện</label>
+                    <select id="district" name="district" class="form-control"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ward">Phường/Xã</label>
+                    <select id="ward" name="ward" class="form-control"></select>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
@@ -190,5 +201,61 @@
         <p>&copy; 2024 Chuyên cung cấp thắt lưng các loại. Hotline: <a href="tel:0397526965">0397526965</a></p>
     </div>
 </footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const provinceSelect = document.getElementById("province");
+        const districtSelect = document.getElementById("district");
+        const wardSelect = document.getElementById("ward");
+
+        // Load danh sách tỉnh/thành
+        fetch("/api/location?type=province")
+            .then(res => res.json())
+            .then(data => {
+                provinceSelect.innerHTML = '<option value="">-- Chọn tỉnh/thành --</option>';
+                data.forEach(p => {
+                    provinceSelect.innerHTML += `<option value="${p.code}">${p.name}</option>`;
+                });
+            });
+
+        // Khi chọn tỉnh → load huyện
+        provinceSelect.addEventListener("change", function () {
+            const provinceCode = this.value;
+            if (!provinceCode) {
+                districtSelect.innerHTML = '';
+                wardSelect.innerHTML = '';
+                return;
+            }
+
+            fetch(`/api/location?type=district&code=${provinceCode}`)
+                .then(res => res.json())
+                .then(data => {
+                    districtSelect.innerHTML = '<option value="">-- Chọn quận/huyện --</option>';
+                    wardSelect.innerHTML = '';
+                    data.districts.forEach(d => {
+                        districtSelect.innerHTML += `<option value="${d.code}">${d.name}</option>`;
+                    });
+                });
+        });
+
+        // Khi chọn huyện → load xã
+        districtSelect.addEventListener("change", function () {
+            const districtCode = this.value;
+            if (!districtCode) {
+                wardSelect.innerHTML = '';
+                return;
+            }
+
+            fetch(`/api/location?type=ward&code=${districtCode}`)
+                .then(res => res.json())
+                .then(data => {
+                    wardSelect.innerHTML = '<option value="">-- Chọn phường/xã --</option>';
+                    data.wards.forEach(w => {
+                        wardSelect.innerHTML += `<option value="${w.code}">${w.name}</option>`;
+                    });
+                });
+        });
+    });
+</script>
+
 </body>
 </html>
