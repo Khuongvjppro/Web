@@ -101,13 +101,13 @@ CREATE TABLE resources (
   resource_id INT AUTO_INCREMENT PRIMARY KEY,
   account_id varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   permission INT NOT NULL,
-  CHECK (permission = -1 OR (permission BETWEEN 0 AND 7)),
+  CHECK (permission >= -1 and permission <= 7),
   FOREIGN KEY (account_id) REFERENCES accounts(account_id)
 ) ENGINE=InnoDB;
 
 insert into resources values(1, 'u1', 7);
 insert into resources values(2, 'u2', 7);
-insert into resources values(3, 'u3', 7);
+insert into resources values(3, 'u3', -1);
 insert into resources values(4, 'u4', 6);
 insert into resources values(5, 'u5', 5);
 insert into resources values(6, 'u6', 0);
