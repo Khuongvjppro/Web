@@ -49,6 +49,7 @@ INSERT INTO accounts VALUES('u7', 'charlie', '123');
 INSERT INTO accounts VALUES('u8', 'dave', '123');
 INSERT INTO accounts VALUES('u9', 'eve', '123');
 INSERT INTO accounts VALUES('u10', 'frank', '123');
+INSERT INTO accounts VALUES('u101', 'newadmin', '123');
 
 CREATE TABLE users (
   user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,6 +78,7 @@ INSERT INTO users VALUES (6, 'u6', 'Bob Brown', 'bob@example.com', '0444555666',
 INSERT INTO users VALUES (7, 'u7', 'Charlie Black', 'charlie@example.com', '0555666777', '1989-07-07', 'Nam', 'https://cdn-icons-png.flaticon.com/512/219/219983.png', '2025-01-04 00:15:19', '2025-01-13 01:10:09');
 INSERT INTO users VALUES (8, 'u8', 'Dave White', 'dave@example.com', '0666777888', '1991-08-08', 'Nam', 'https://cdn-icons-png.flaticon.com/512/219/219983.png', '2025-01-04 00:15:19', '2025-01-13 01:10:13');
 INSERT INTO users VALUES (9, 'u9', 'Eve Green', 'eve@example.com', '0777888999', '1994-09-09', 'Nữ', 'https://cdn-icons-png.flaticon.com/512/219/219983.png', '2025-01-04 00:15:19', '2025-01-13 01:10:19');
+INSERT INTO users VALUES (11, 'u101', 'New Admin', 'newadmin@example.com', '0999999999', '1990-01-01', 'Nam', 'https://cdn-icons-png.flaticon.com/512/219/219983.png', '2025-01-04 00:15:19', '2025-01-13 01:10:19');
 
 CREATE TABLE roles (
   role_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -96,6 +98,7 @@ insert into roles values(7, 'u7', 0);
 insert into roles values(8, 'u8', 0);
 insert into roles values(9, 'u9', 0);
 insert into roles values(10, 'u10', 0);
+insert into roles values(11, 'u101', 1);
 
 CREATE TABLE resources (
   resource_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -115,6 +118,7 @@ insert into resources values(7, 'u7', 5);
 insert into resources values(8, 'u8', 6);
 insert into resources values(9, 'u9', 6);
 insert into resources values(10, 'u10', 7);
+insert into resources values(11, 'u101', 7);
 
 CREATE TABLE log (
   log_id INT AUTO_INCREMENT PRIMARY KEY,
