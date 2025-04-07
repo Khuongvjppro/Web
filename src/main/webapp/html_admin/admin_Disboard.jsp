@@ -51,16 +51,16 @@
           <a href="#" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
-          <a href=admin_user.html ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+          <a href=${pageContext.request.contextPath}/admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
         </li>
         <li>
-          <a href="admin_Products.html"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
+          <a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
         </li>
         <li>
-          <a href="admin_Orders.html" ><i class="fa fa-qrcode "></i>ORDERS</a>
+          <a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
         </li>
         <li>
-          <a href="admin_Category.html"><i class="fa fa-bar-chart-o"></i>Category</a>
+          <a href="admin_Category.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
         </li>
 
         <li>

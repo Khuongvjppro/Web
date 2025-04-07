@@ -23,18 +23,27 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             HttpSession session = req.getSession();
             session.setAttribute("auth", user);
+            session.setAttribute("role", user.getRole());
 
             Cookie userCookie = new Cookie("userId", String.valueOf(user.getId()));
             userCookie.setMaxAge(60 * 60 * 24 * 7);
             userCookie.setPath(req.getContextPath());
             resp.addCookie(userCookie);
 
-            resp.sendRedirect(req.getContextPath() + "/home");
+            // Phân quyền chuyển trang
+            if (user.getRole() == 1) {
+                // Admin
+                resp.sendRedirect(req.getContextPath() + "/html_admin/admin_Disboard.jsp");
+            } else {
+                // Người dùng
+                resp.sendRedirect(req.getContextPath() + "/home");
+            }
         } else {
             req.setAttribute("error", "Invalid username or password");
             req.getRequestDispatcher("/View/Login.jsp").forward(req, resp);
         }
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
