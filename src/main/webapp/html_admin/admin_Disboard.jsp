@@ -51,7 +51,7 @@
           <a href="#" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
-          <a href=${pageContext.request.contextPath}/admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+          <a href="admin_user.jsp" ><i class="fa fa-table"></i>USER<span class="badge"></span></a>
         </li>
         <li>
           <a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
