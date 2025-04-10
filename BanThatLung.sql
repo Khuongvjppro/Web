@@ -18,6 +18,8 @@ create database shop_that_lung;
 use shop_that_lung;
 
 DROP TABLE IF EXISTS reviews;
+drop table if exists warehouse;
+drop table if exists stock;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS order_details;
@@ -362,5 +364,68 @@ INSERT INTO reviews VALUES ('r6', 35, 'u6', 4, 'https://example.com/image6.jpg',
 INSERT INTO reviews VALUES ('r7', 34, 'u7', 5, 'https://example.com/image7.jpg', 'Xuất sắc!', '2025-01-07');
 INSERT INTO reviews VALUES ('r8', 40, 'u8', 3, 'https://example.com/image8.jpg', 'Bình thường.', '2025-01-08');
 INSERT INTO reviews VALUES ('r9', 41, 'u9', 2, 'https://example.com/image9.jpg', 'Không tốt lắm.', '2025-01-09');
+
+create table warehouse(
+	warehouse_id INT AUTO_INCREMENT PRIMARY KEY,
+	product_id INT NOT NULL,
+	quantity INT NOT NULL DEFAULT 0,
+	last_updated datetime DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT fk_warehouse_product FOREIGN KEY (product_id) REFERENCES products(id)
+)ENGINE=InnoDB;
+
+ALTER TABLE Warehouse 
+ADD COLUMN initial_quantity INT NOT NULL DEFAULT 0;
+
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(1, 22, 100, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(2, 23, 10, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(3, 24, 65, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(4, 25, 50, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(5, 26, 40, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(6, 27, 70, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(7, 28, 80, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(8, 29, 100, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(9, 30, 10, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(10, 31, 66, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(11, 32, 49, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(12, 33, 50, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(13, 34, 60, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(14, 35, 50, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(15, 36, 111, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(16, 37, 200, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(17, 38, 30, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(18, 39, 62, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(19, 40, 33, '2024-01-01');
+insert into warehouse(warehouse_id, product_id, quantity, last_updated) values(20, 41, 16, '2024-01-01');
+
+create table stock(
+	stock_id INT AUTO_INCREMENT PRIMARY KEY,
+	product_id INT NOT NULL,
+	quantity INT NOT NULL,
+	entry_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+	supplier VARCHAR(255) DEFAULT NULL,
+	note TEXT DEFAULT NULL,
+	CONSTRAINT fk_nhapkho_product FOREIGN KEY (product_id) REFERENCES products(id)
+)ENGINE=InnoDB;
+
+insert into stock values(1, 22, 50, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(2, 23, 20, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(3, 24, 15, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(4, 25, 10, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(5, 26, 40, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(6, 27, 70, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(7, 28, 60, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(8, 29, 22, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(9, 30, 14, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(10, 31, 52, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(11, 32, 33, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(12, 33, 41, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(13, 34, 28, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(14, 35, 30, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(15, 36, 34, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(16, 37, 29, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(17, 38, 61, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(18, 39, 67, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(19, 40, 55, '2024-2-1', 'công ty abc', 'abc');
+insert into stock values(20, 41, 58, '2024-2-1', 'công ty abc', 'abc');
 
 SET FOREIGN_KEY_CHECKS = 1;
