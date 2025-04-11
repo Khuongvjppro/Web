@@ -60,7 +60,7 @@
           <a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
         </li>
         <li>
-          <a href="admin_Category.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
+          <a href="admin_Categories.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
         </li>
 
         <li>

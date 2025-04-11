@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -113,24 +114,23 @@
         <%-- Ví dụ: Lặp qua danh sách dữ liệu từ backend --%>
         <c:forEach items="${productList}" var="product">
           <tr>
-            <th scope="row">${product.getId()}</th>
-            <td><img  style="width: 100px; height: auto" src="../images/thatlung4.jpg"></td>
-            <td>${product.getName()}</td>
-            <td>${product.getPrice()}</td>
-            <td>${product.getDescription()}</td>
-            <td>${product.getQuantity()}</td>
-            <td>${product.getCategory().getName()}</td>
-<%--            <td>${product.getBrand}</td>--%>
-<%--            <td>${product.getMaterial()}</td>--%>
-<%--            <td>${product.getStatus}</td>--%>
+            <th scope="row">${product.id}</th>
+            <td><img style="width: 100px; height: auto" src="../images/thatlung4.jpg"></td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.description}</td>
+            <td>${product.quantity}</td>
+            <td>${product.category.name}</td>
+              <%--  <td>${product.brand.name}</td> --%>
+              <%--  <td>${product.material.name}</td> --%>
+              <%--  <td>${product.status}</td> --%>
             <td>
-              <a href="<%=request.getContextPath()%>/admin_Products/edit?id=${product.getId()}"> <i
-                      class="fa-solid fa-pen-to-square"></i></a>
-              <a href="<%=request.getContextPath()%>/admin_Products/delete?id=${product.getId()}"><i
-                      class="fa-solid fa-trash"></i></a>
+              <a href="<%=request.getContextPath()%>/admin_Products/edit?id=${product.id}"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a href="<%=request.getContextPath()%>/admin_Products/delete?id=${product.id}"><i class="fa-solid fa-trash"></i></a>
             </td>
           </tr>
         </c:forEach>
+
         </tbody>
       </table>
 

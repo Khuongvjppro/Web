@@ -202,21 +202,89 @@
     </div>
 </footer>
 <script>
-    window.onload = function () {
-        fetch("/projectltw/api/location?type=province")
-            .then(response => response.json())
-            .then(data => {
-                const select = document.createElement("select");
-                select.name = "province";
-                data.forEach(province => {
-                    const opt = document.createElement("option");
-                    opt.value = province.code;
-                    opt.textContent = province.name;
-                    select.appendChild(opt);
-                });
-                document.querySelector(".payment-form form").insertBefore(select, document.getElementById("address"));
+    let provinceData = [];
+
+    fetch('<%=request.getContextPath()%>/api/locations')
+        .then(res => res.json())
+        .then(rawData => {
+            // Convert object to array
+            provinceData = Object.entries(rawData).map(([provinceCode, provinceObj]) => ({
+                code: provinceCode,
+                name: provinceObj.name,
+                districts: Object.entries(provinceObj["quan-huyen"]).map(([districtCode, districtObj]) => ({
+                    code: districtCode,
+                    name: districtObj.name,
+                    wards: Object.entries(districtObj["xa-phuong"]).map(([wardCode, wardObj]) => ({
+                        code: wardCode,
+                        name: wardObj.name
+                    }))
+                }))
+            }));
+
+            // Load tỉnh
+            const provinceSelect = document.getElementById("province");
+            provinceData.forEach((province, i) => {
+                const opt = document.createElement("option");
+                opt.value = i;
+                opt.text = province.name;
+                provinceSelect.appendChild(opt);
             });
-    };
+        })
+        .catch(err => {
+            console.error("Lỗi tải JSON:", err);
+            alert("Không thể tải dữ liệu địa phương!");
+        });
+
+    function loadDistricts() {
+        const provinceIndex = document.getElementById("province").value;
+
+        // Debug dữ liệu:
+        console.log("provinceIndex =", provinceIndex);
+        console.log("provinceData =", provinceData);
+        console.log("provinceData[provinceIndex] =", provinceData[provinceIndex]);
+
+        const districtSelect = document.getElementById("district");
+        const wardSelect = document.getElementById("ward");
+
+        districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+
+        if (provinceIndex === "") return;
+
+        const province = provinceData[provinceIndex];
+        if (!province || !province.districts) {
+            alert("Không có dữ liệu quận/huyện cho tỉnh được chọn");
+            return;
+        }
+
+        province.districts.forEach((district, i) => {
+            const opt = document.createElement("option");
+            opt.value = i;
+            opt.text = district.name;
+            districtSelect.appendChild(opt);
+        });
+    }
+
+    function loadWards() {
+        const provinceIndex = document.getElementById("province").value;
+        const districtIndex = document.getElementById("district").value;
+        const wardSelect = document.getElementById("ward");
+
+        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+
+        if (provinceIndex === "" || districtIndex === "") return;
+
+        const wards = provinceData[provinceIndex].districts[districtIndex].wards;
+        wards.forEach((ward) => {
+            const opt = document.createElement("option");
+            opt.value = ward.code;
+            opt.text = ward.name;
+            wardSelect.appendChild(opt);
+        });
+    }
 </script>
+
+
+
 </body>
 </html>
