@@ -1,6 +1,7 @@
 package com.banthatlung.Controller;
 
-import com.banthatlung.Dao.model.Product;
+import com.banthatlung.Dao.UserDao;
+import com.banthatlung.Dao.model.Account;
 import com.banthatlung.Dao.model.Review;
 import com.banthatlung.Dao.model.User;
 import com.banthatlung.services.ReviewService;
@@ -14,14 +15,24 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Map;
 
 @WebServlet(name = "AddReview", value = "/review")
 public class AddReview extends HttpServlet {
-    @Override
+    private static final long serialVersionUID = 1L;
+	@Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("auth");
-        String uid = user.getId();
+        UserDao userDao = new UserDao();
+        Account a = null;
+        Map<String, Account> map = userDao.getAccountAndUser();
+        for (User u : userDao.getAll()) {
+        	if (u.getId() == user.getId()) {
+        		a = map.get(u.getAccountID()); 
+        	}
+        }
+        String uid = a.getId();
 
         String productId = req.getParameter("pid");
 

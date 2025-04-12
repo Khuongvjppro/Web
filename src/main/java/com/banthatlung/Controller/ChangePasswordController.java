@@ -1,5 +1,8 @@
 package com.banthatlung.Controller;
 
+import com.banthatlung.Dao.AccountDAO;
+import com.banthatlung.Dao.UserDao;
+import com.banthatlung.Dao.model.Account;
 import com.banthatlung.Dao.model.User;
 import com.banthatlung.services.AuthService;
 import jakarta.servlet.ServletException;
@@ -7,11 +10,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Map;
 
 @WebServlet(name = "ChangePasswordController", value = "/change-password")
 public class ChangePasswordController extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
-    @Override
+	@Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = getUserFromCookie(req);
 
@@ -32,9 +38,25 @@ public class ChangePasswordController extends HttpServlet {
         }
 
         AuthService authService = new AuthService();
+        UserDao userDao = new UserDao();
+        AccountDAO dao = new AccountDAO(); 
+        Account a = null;
+        Map<String, Account> map = userDao.getAccountAndUser();
+        for (User u : userDao.getAll()) {
+        	if (u.getId() == user.getId()) {
+        		a = map.get(u.getAccountID());
+        		break;
+        	}
+        }
 
         // Đổi mật khẩu
-        boolean isUpdated = authService.changePassword(user.getId(), currentPassword, newPassword);
+        boolean isUpdated = false;
+		try {
+			isUpdated = authService.changePassword(a.getId(), currentPassword, newPassword);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         if (isUpdated) {
             req.getSession().invalidate(); // Đăng xuất sau khi đổi mật khẩu thành công
@@ -62,7 +84,7 @@ public class ChangePasswordController extends HttpServlet {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("userId".equals(cookie.getName())) {
-                    String userId = cookie.getValue();
+                    int userId = Integer.parseInt(cookie.getValue());
                     AuthService authService = new AuthService();
                     return authService.findByUserId(userId);
                 }
