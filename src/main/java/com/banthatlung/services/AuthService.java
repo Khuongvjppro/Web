@@ -1,39 +1,42 @@
 package com.banthatlung.services;
 
+import java.sql.SQLException;
+
+import com.banthatlung.Dao.AccountDAO;
 import com.banthatlung.Dao.UserDao;
+import com.banthatlung.Dao.model.Account;
 import com.banthatlung.Dao.model.User;
 
 public class AuthService {
-    public User checkLogin(String username, String pass){
-        UserDao dao = new UserDao();
-        User u = dao.findUser(username);
-        if(u != null && pass.equals(u.getPass())){
-            u.setPass(null);
-            return u;
+    public Account checkLogin(String username, String pass){
+        AccountDAO dao = new AccountDAO();
+        Account account = dao.findAccount(username);
+        if(account != null && pass.equals(account.getPass())){
+            return account;
         }
         return null;
     }
 
-    public User findByUserId(String userId){
+    public User findByUserId(int userId){
         UserDao dao = new UserDao();
         return dao.findUserById(userId);
     }
 
 
-    public boolean register(User user) {
-        UserDao dao = new UserDao();
-        User u = dao.findUser(user.getUsername());
-        if(u != null){
+    public boolean register(Account account) throws SQLException {
+    	AccountDAO dao = new AccountDAO();
+        Account a = dao.findAccount(account.getUsername());
+        if(a != null) {
             return false;
         }
-        return dao.registerUser(user);
+        return dao.createAccount(a);
     }
 
-    public boolean changePassword(String userId, String oldPassword, String newPassword) {
-        UserDao userDao = new UserDao();
-        User user = userDao.findUserById(userId);
-        if (user != null && oldPassword.equals(user.getPass())) {
-            return userDao.updatePassword(userId, newPassword);
+    public boolean changePassword(String accountId, String oldPassword, String newPassword) throws SQLException {
+        AccountDAO dao = new AccountDAO();
+        Account a = dao.getAccountById(accountId);
+        if (a != null && a.getPass().equals(oldPassword)) {
+        	return dao.updatePassword(accountId, newPassword);
         }
         return false;
     }
