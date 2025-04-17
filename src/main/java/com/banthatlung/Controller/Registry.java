@@ -1,5 +1,6 @@
 package com.banthatlung.Controller;
 
+import com.banthatlung.Dao.model.Account;
 import com.banthatlung.Dao.model.User;
 import com.banthatlung.services.AuthService;
 import jakarta.servlet.ServletException;
@@ -9,11 +10,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 @WebServlet(name = "Registry", value = "/register")
 public class Registry extends HttpServlet {
-    @Override
+    private static final long serialVersionUID = 1L;
+
+	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/View/register.jsp").forward(req, resp);
+        req.getRequestDispatcher("/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -30,23 +34,31 @@ public class Registry extends HttpServlet {
 
         if (!pwd.equals(cpwd)) {
             req.setAttribute("error", "Mật khẩu không khớp");
-            req.getRequestDispatcher("/View/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/register.jsp").forward(req, resp);
             return;
         }
 
         String hashedPassword = PasswordUtils.encryptPassword(pwd);
         User u = new User();
-        u.setUsername(uname);
+        Account account = new Account();
+        account.setUsername(uname);
         u.setEmail(fname);
-        u.setPass(hashedPassword);
+        account.setPass(hashedPassword);
 
-        if (authService.register(u)) {
-            req.setAttribute("success", "Đăng ký thành công, vui lòng đăng nhập!");
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
-        } else {
-            req.setAttribute("error", "Tên tài khoản đã tồn tại");
-            req.getRequestDispatcher("/View/register.jsp").forward(req, resp);
-        }
+        try {
+			if (authService.register(account)) {
+			    req.setAttribute("success", "Đăng ký thành công, vui lòng đăng nhập!");
+			    req.getRequestDispatcher("/login.jsp").forward(req, resp);
+			} else {
+			    req.setAttribute("error", "Tên tài khoản đã tồn tại");
+			    req.getRequestDispatcher("/register.jsp").forward(req, resp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }
-
