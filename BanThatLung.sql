@@ -429,3 +429,9 @@ insert into stock values(19, 40, 55, '2024-2-1', 'công ty abc', 'abc');
 insert into stock values(20, 41, 58, '2024-2-1', 'công ty abc', 'abc');
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE INDEX idx_warehouse_product_id ON warehouse(product_id);
+CREATE INDEX idx_order_detail_prouct_id ON order_details(product_id);
+
+CREATE INDEX idx_order_date ON orders(orderDate);
+CREATE INDEX idx_order_detail_order_id ON order_details(order_id);
