@@ -210,7 +210,9 @@ public class ProductDao {
     }
 
     public static void main(String[] args) {
-
-
+    	ProductDao dao = new ProductDao();
+    	for(Product p : dao.getAll(1, 8)) {
+    		System.out.println(p);
+    	}
     }
 }

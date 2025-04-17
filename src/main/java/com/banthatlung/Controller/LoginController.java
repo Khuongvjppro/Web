@@ -1,6 +1,6 @@
 package com.banthatlung.Controller;
 
-import com.banthatlung.Dao.model.User;
+import com.banthatlung.Dao.model.Account;
 import com.banthatlung.services.AuthService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,21 +10,21 @@ import java.io.IOException;
 
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
-
-    @Override
+    private static final long serialVersionUID = 1L;
+	@Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("uname");
         String password = req.getParameter("pass");
 
         String hashpass = PasswordUtils.encryptPassword(password);
         AuthService authService = new AuthService();
-        User user = authService.checkLogin(username, hashpass);
+        Account acc = authService.checkLogin(username, hashpass);
 
-        if (user != null) {
+        if (acc != null) {
             HttpSession session = req.getSession();
-            session.setAttribute("auth", user);
+            session.setAttribute("auth", acc);
 
-            Cookie userCookie = new Cookie("userId", String.valueOf(user.getId()));
+            Cookie userCookie = new Cookie("userId", String.valueOf(acc.getId()));
             userCookie.setMaxAge(60 * 60 * 24 * 7);
             userCookie.setPath(req.getContextPath());
             resp.addCookie(userCookie);
@@ -44,8 +44,8 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String code = request.getParameter("code");
         GoogleLogin gg = new GoogleLogin();
-        String accessToken = gg.getToken(code);
-        GoogleAccount acc = gg.getUserInfo(accessToken);
+        String accessToken = GoogleLogin.getToken(code);
+        GoogleAccount acc = GoogleLogin.getUserInfo(accessToken);
         System.out.println(acc);
     }
     protected void proccessRequest2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
