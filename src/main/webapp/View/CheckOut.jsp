@@ -106,12 +106,12 @@
                 </div>
                 <div class="form-group">
                     <label for="province">Tỉnh/Thành phố</label>
-                    <select id="province" class="form-control"></select>
+                    <select id="province" class="form-control" onchange="loadDistricts()"></select>
                 </div>
 
                 <div class="form-group">
                     <label for="district">Quận/Huyện</label>
-                    <select id="district" class="form-control"></select>
+                    <select id="district" class="form-control" onchange="loadWards()"></select>
                 </div>
 
                 <div class="form-group">
