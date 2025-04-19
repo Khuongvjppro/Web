@@ -9,7 +9,7 @@ import jakarta.servlet.http.Cookie;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import org.json.*;
+import org.json.JSONObject;
 
 @WebServlet(name = "LoginController", value = "/loginAPI")
 public class LoginAPI extends HttpServlet {
