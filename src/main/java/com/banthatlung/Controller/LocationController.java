@@ -1,24 +1,30 @@
 package com.banthatlung.Controller;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 @WebServlet("/api/locations")
 public class LocationController extends HttpServlet {
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        resp.setContentType("application/json");
-        InputStream inputStream = getServletContext().getResourceAsStream("/data/vietnam_location.json");
-        if (inputStream != null) {
-            String json = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            resp.getWriter().write(json);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("application/json;charset=UTF-8");
+
+        // Đọc file vietnam_location.json từ thư mục data
+        InputStream is = getServletContext().getResourceAsStream("/data/vietnam_location.json");
+
+        if (is != null) {
+            // Đọc hết nội dung file thành chuỗi
+            byte[] bytes = is.readAllBytes();
+            String jsonContent = new String(bytes, "UTF-8");
+
+            // Ghi dữ liệu trả về response
+            resp.getWriter().write(jsonContent);
         } else {
+            // Nếu không tìm thấy file
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            resp.getWriter().write("{\"error\":\"File not found\"}");
+            resp.getWriter().write("{\"error\": \"Không tìm thấy dữ liệu!\"}");
         }
     }
 }

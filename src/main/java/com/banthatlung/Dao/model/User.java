@@ -4,10 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class User implements Serializable {
-    private String id;
-    private String username;
-    private String pass;
-    private int role;
+    private static final long serialVersionUID = 1L;
+	private int id;
+	private String accountID;
     private String name;
     private String email;
     private String phone;
@@ -15,7 +14,7 @@ public class User implements Serializable {
     private String gender;
     private String image;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -23,93 +22,92 @@ public class User implements Serializable {
 
     }
 
-    public User(String id, String username, String pass, int role, String name, String email, String phone, Date birthday, String gender, String image) {
-        this.id = id;
-        this.username = username;
-        this.pass = pass;
-        this.role = role;
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.birthday = birthday;
-        this.gender = gender;
-        this.image = image;
-    }
+	public User(int id, String accountID, String name, String email, String phone, Date birthday, String gender,
+			String image) {
+		super();
+		this.id = id;
+		this.accountID = accountID;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.image = image;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public User(int id, String accountID, String name, String email, String phone) {
+		super();
+		this.id = id;
+		this.accountID = accountID;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getAccountID() {
+		return accountID;
+	}
 
-    public String getPass() {
-        return pass;
-    }
+	public void setAccountID(String accountID) {
+		this.accountID = accountID;
+	}
 
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public int getRole() {
-        return role;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setRole(int role) {
-        this.role = role;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public Date getBirthday() {
+		return birthday;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 
-    public Date getBirthday() {
-        return birthday;
-    }
+	public String getGender() {
+		return gender;
+	}
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getImage() {
+		return image;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setImage(String image) {
+		this.image = image;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	@Override
+	public String toString() {
+		return "Name: " + this.name + ", gender: " + this.gender + ", birthday: " + this.birthday + "\n" +
+				"Email: " + this.email + ", Phone: " + this.phone + ", accountID: " + this.accountID;
+	}
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

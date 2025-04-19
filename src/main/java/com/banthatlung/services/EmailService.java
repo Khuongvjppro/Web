@@ -3,14 +3,19 @@ package com.banthatlung.services;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import javax.mail.Authenticator;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+
 import java.util.Properties;
 
 public class EmailService {
 
     private static final String SMTP_HOST = "smtp.gmail.com";
-    private static final String SMTP_PORT = "587";
-    private static final String SMTP_USERNAME = "22130129@st.hcmuaf.edu.vn"; // Thay bằng email của bạn
-    private static final String SMTP_PASSWORD = "abya hlec fzus bcci"; // Thay bằng mật khẩu ứng dụng của bạn
+    private static final String SMTP_PORT = "";
+    private static final String SMTP_USERNAME = ""; // Thay bằng email của bạn
+    private static final String SMTP_PASSWORD = ""; // Thay bằng mật khẩu ứng dụng của bạn
 
     public void sendMail(String recipientEmail, String subject, String body) throws MessagingException {
         // Cấu hình các thuộc tính SMTP
