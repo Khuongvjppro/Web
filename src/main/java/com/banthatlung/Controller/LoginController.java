@@ -11,7 +11,7 @@ import java.io.IOException;
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-	@Override
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("uname");
         String password = req.getParameter("pass");
@@ -49,4 +49,3 @@ public class LoginController extends HttpServlet {
         System.out.println(acc);
     }
 }
-

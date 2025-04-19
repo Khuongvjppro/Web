@@ -76,17 +76,17 @@
             <h3>Các sản phẩm: </h3>
             <ul>
                 <c:if test="${cart != null}">
-                    <%
-                        int total = 0;
-                        HashMap<Integer, ProductCart> carts = (HashMap<Integer, ProductCart>) request.getAttribute("cart");
-                        for (Map.Entry<Integer, ProductCart> entry : carts.entrySet()) {
-                            Integer key = entry.getKey();
-                            ProductCart value = entry.getValue();
-                            total += value.getQuantity() * value.getProduct().getPrice();
-                    %>
-                    <li> - <%= value.getProduct().getName()%><span><%= value.getProduct().getPrice()%></span>x <%= value.getQuantity()%></li>
+                <%
+                    int total = 0;
+                    HashMap<Integer, ProductCart> carts = (HashMap<Integer, ProductCart>) request.getAttribute("cart");
+                    for (Map.Entry<Integer, ProductCart> entry : carts.entrySet()) {
+                        Integer key = entry.getKey();
+                        ProductCart value = entry.getValue();
+                        total += value.getQuantity() * value.getProduct().getPrice();
+                %>
+                <li> - <%= value.getProduct().getName()%><span><%= value.getProduct().getPrice()%></span>x <%= value.getQuantity()%></li>
 
-                    <% } %>
+                <% } %>
 
                 <li class="total">Tổng cộng :<span><%=total%></span></li>
             </ul>
@@ -104,10 +104,21 @@
                     <label for="phone" class="form-label">SDT</label>
                     <input type="text" name="phone" class="form-control" id="phone" placeholder="Mô tả">
                 </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Địa chỉ</label>
-                    <input type="text" name="address" class="form-control" id="address" placeholder="Mô tả">
+                <div class="form-group">
+                    <label for="province">Tỉnh/Thành phố</label>
+                    <select id="province" class="form-control" onchange="loadDistricts()"></select>
                 </div>
+
+                <div class="form-group">
+                    <label for="district">Quận/Huyện</label>
+                    <select id="district" class="form-control" onchange="loadWards()"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ward">Phường/Xã</label>
+                    <select id="ward" class="form-control"></select>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
@@ -190,5 +201,87 @@
         <p>&copy; 2024 Chuyên cung cấp thắt lưng các loại. Hotline: <a href="tel:0397526965">0397526965</a></p>
     </div>
 </footer>
+<script>
+    let provinceData = [];
+
+    fetch('<%=request.getContextPath()%>/api/locations')
+        .then(res => res.json())
+        .then(rawData => {
+            // Convert object to array
+            provinceData = Object.entries(rawData).map(([provinceCode, provinceObj]) => ({
+                code: provinceCode,
+                name: provinceObj.name,
+                districts: Object.entries(provinceObj["quan-huyen"]).map(([districtCode, districtObj]) => ({
+                    code: districtCode,
+                    name: districtObj.name,
+                    wards: Object.entries(districtObj["xa-phuong"]).map(([wardCode, wardObj]) => ({
+                        code: wardCode,
+                        name: wardObj.name
+                    }))
+                }))
+            }));
+
+            // Load tỉnh
+            const provinceSelect = document.getElementById("province");
+            provinceData.forEach((province, i) => {
+                const opt = document.createElement("option");
+                opt.value = i;
+                opt.text = province.name;
+                provinceSelect.appendChild(opt);
+            });
+        })
+        .catch(err => {
+            console.error("Lỗi tải JSON:", err);
+            alert("Không thể tải dữ liệu địa phương!");
+        });
+
+    function loadDistricts() {
+        const provinceIndex = document.getElementById("province").value;
+
+        // Debug dữ liệu:
+        console.log("provinceIndex =", provinceIndex);
+        console.log("provinceData =", provinceData);
+        console.log("provinceData[provinceIndex] =", provinceData[provinceIndex]);
+
+        const districtSelect = document.getElementById("district");
+        const wardSelect = document.getElementById("ward");
+
+        districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+
+        if (provinceIndex === "") return;
+
+        const province = provinceData[provinceIndex];
+        if (!province || !province.districts) {
+            alert("Không có dữ liệu quận/huyện cho tỉnh được chọn");
+            return;
+        }
+
+        province.districts.forEach((district, i) => {
+            const opt = document.createElement("option");
+            opt.value = i;
+            opt.text = district.name;
+            districtSelect.appendChild(opt);
+        });
+    }
+
+    function loadWards() {
+        const provinceIndex = document.getElementById("province").value;
+        const districtIndex = document.getElementById("district").value;
+        const wardSelect = document.getElementById("ward");
+
+        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+
+        if (provinceIndex === "" || districtIndex === "") return;
+
+        const wards = provinceData[provinceIndex].districts[districtIndex].wards;
+        wards.forEach((ward) => {
+            const opt = document.createElement("option");
+            opt.value = ward.code;
+            opt.text = ward.name;
+            wardSelect.appendChild(opt);
+        });
+    }
+</script>
 </body>
 </html>

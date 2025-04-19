@@ -6,9 +6,9 @@ import com.banthatlung.Dao.model.Inventory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
-import javax.servlet.annotation.WebServlet;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.WebServlet;
 
 @WebServlet(urlPatterns = {"/admin_Inventory"})
 public class InventoryServlet extends HttpServlet {
