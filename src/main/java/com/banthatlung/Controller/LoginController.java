@@ -11,7 +11,11 @@ import java.io.IOException;
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
+<<<<<<< HEAD
 	@Override
+=======
+    @Override
+>>>>>>> 992599882de8e023a8645083283aba6d10675d56
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("uname");
         String password = req.getParameter("pass");
@@ -46,6 +50,7 @@ public class LoginController extends HttpServlet {
         GoogleLogin gg = new GoogleLogin();
         String accessToken = GoogleLogin.getToken(code);
         GoogleAccount acc = GoogleLogin.getUserInfo(accessToken);
+<<<<<<< HEAD
         System.out.println(acc);
     }
     protected void proccessRequest2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,7 +60,8 @@ public class LoginController extends HttpServlet {
         String accessToken = FB.getToken(code);
         System.out.println(accessToken);
         FacebookAccount acc = FB.getUserInfo(accessToken);
+=======
+>>>>>>> 992599882de8e023a8645083283aba6d10675d56
         System.out.println(acc);
     }
 }
-
