@@ -24,7 +24,7 @@ public class InventoryReportDAO {
      * @return List<ProductInventoryReport>
      * @throws SQLException
      */
-    public List<QuarterlyReport> getQuarterlyReport(int year) throws SQLException {
+    public List<QuarterlyReport> getQuarterlyReport(int year, int quarter) throws SQLException {
     	 List<QuarterlyReport> list = new ArrayList<>();
 
          String sql = """
@@ -36,13 +36,14 @@ public class InventoryReportDAO {
          	FROM orders o
          	JOIN order_details od ON o.id = od.id
          	JOIN products p ON od.id = p.id
-         	WHERE YEAR(o.orderDate) = ?
+         	WHERE YEAR(o.orderDate) = ? AND QUARTER(o.orderDate) = ?
          	GROUP BY quarter, p.id
          	ORDER BY quarter, p.id;
          """;
 
          try (PreparedStatement stmt = DBConnect2.getPreparedStatement(sql)) {
              stmt.setInt(1, year);
+             stmt.setInt(2, quarter);
              ResultSet rs = stmt.executeQuery();
 
              while (rs.next()) {
@@ -111,6 +112,6 @@ public class InventoryReportDAO {
 		InventoryReportDAO dao = new InventoryReportDAO();
 		
 		System.out.println(dao.getInventoryReport());
-		System.out.println(dao.getQuarterlyReport(2025));
+		System.out.println(dao.getQuarterlyReport(2025, 1));
 	}
 }
