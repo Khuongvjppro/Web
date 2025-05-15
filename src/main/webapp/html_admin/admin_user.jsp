@@ -86,32 +86,23 @@
 
 
                 <li>
-                    <a href="admin_Disboard.html"><i class="fa fa-desktop "></i>Dashboard</a>
-                </li>
-
-
-                <li class="active-link">
-                    <a href="#"><i class="fa fa-table "></i>USER<span class="badge"></span></a>
-                </li>
-                <li>
-                    <a href="admin_Products.html"><i class="fa fa-edit "></i>PRODUCTS<span></span></a>
-                </li>
-                <li>
-                    <a href="admin_Orders.html"><i class="fa fa-qrcode "></i>ORDERS</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-bar-chart-o"></i>Category</a>
-                </li>
-
-                <li>
-                    <a href="#"><i class="fa fa-edit "></i>My Link Three </a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-table "></i>My Link Four</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-edit "></i>My Link Five </a>
-                </li>
+          			<a href="admin_Disboard.jsp" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
+        		</li>
+        		<li>
+          			<a href=admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+        		</li>
+        		<li>
+          			<a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
+        		</li>
+        		<li>
+          			<a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
+        		</li>
+        		<li>
+          			<a href="admin_Categories.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
+        		</li>
+        		<li>
+         			 <a href="admin_Inventory.jsp"><i class="fa fa-table"></i>Inventory</a>
+        		</li>
 
             </ul>
         </div>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,26 +60,16 @@
           <a href="admin_Disboard.jsp" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
-          <a href=admin_user.html ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+          <a href=admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
         </li>
         <li>
-          <a href="admin_Products.html"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
+          <a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
         </li>
         <li>
-          <a href="admin_Orders.html" ><i class="fa fa-qrcode "></i>ORDERS</a>
+          <a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
         </li>
         <li>
-          <a href="admin_Category.html"><i class="fa fa-bar-chart-o"></i>Category</a>
-        </li>
-
-        <li>
-          <a href="#"><i class="fa fa-edit "></i>My Link Three </a>
-        </li>
-        <li>
-          <a href="#"><i class="fa fa-table "></i>My Link Four</a>
-        </li>
-        <li>
-          <a href="#"><i class="fa fa-edit "></i>My Link Five </a>
+          <a href="admin_Categories.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
         </li>
         <li>
           <a href="admin_Inventory.jsp"><i class="fa fa-table"></i>Inventory</a>
@@ -101,6 +91,10 @@
         </div>
     </c:if>
     
+    <c:if test="${empty reports}">
+    	<p style="color:red;text-align:center;">Không có dữ liệu tồn kho để hiển thị.</p>
+	</c:if>
+    
     <!-- Hiển thị bảng báo cáo tồn kho -->
     <form action="InventoryServlet" method="get">
     <table>
@@ -115,10 +109,10 @@
         <tbody>
             <c:forEach var="report" items="${reports}">
                 <tr>
-                    <td>${report.productID}</td>
-                    <td>${report.initialQuantity}</td>
-                    <td>${report.currentQuantity}</td>
-                    <td>${report.reorderStatus}</td>
+                    <td>${report.getProductID()}</td>
+                    <td>${report.getInitialQuantity()}</td>
+                    <td>${report.getCurrentQuantity()}</td>
+                    <td>${report.getReorderStatus()}</td>
                 </tr>
             </c:forEach>
         </tbody>
