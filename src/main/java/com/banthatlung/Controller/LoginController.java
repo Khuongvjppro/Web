@@ -49,4 +49,3 @@ public class LoginController extends HttpServlet {
         System.out.println(acc);
     }
 }
-

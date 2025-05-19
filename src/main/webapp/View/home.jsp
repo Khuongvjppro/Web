@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
 <!--Header-->
@@ -24,10 +25,10 @@
 
         <!-- Menu điều hướng -->
         <div class="menu d-flex">
-            <a href="${pageContext.request.contextPath}/home" class="text-white mx-3">Danh mục sản phẩm</a>
-            <a href="${pageContext.request.contextPath}/about" class="text-white mx-3">Giới thiệu</a>
-            <a href="${pageContext.request.contextPath}/policy" class="text-white mx-3">Chính sách</a>
-            <a href="${pageContext.request.contextPath}/contact" class="text-white mx-3">Liên hệ</a>
+            <a href="${pageContext.request.contextPath}/home" class="text-white">Danh mục sản phẩm</a>
+            <a href="${pageContext.request.contextPath}/aboutUs" class="text-white">Giới thiệu</a>
+            <a href="${pageContext.request.contextPath}/policy" class="text-white">Chính sách</a>
+            <a href="${pageContext.request.contextPath}/contactUs" class="text-white">Liên hệ</a>
         </div>
 
 
@@ -154,6 +155,22 @@
             <button class="btn btn-outline-primary mx-1 my-2" onclick="window.location.href='${pageContext.request.contextPath}/home?page=${i}'">${i}</button>
         </c:forEach>
     </div>
+    <%
+        String added = request.getParameter("added");
+        if ("success".equals(added)) {
+    %>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Thêm vào giỏ hàng thành công!',
+            text: 'Sản phẩm đã được thêm vào giỏ hàng.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#3085d6'
+        });
+    </script>
+    <%
+        }
+    %>
 
 </section>
 
@@ -222,17 +239,13 @@
 
         <!-- Thông tin bản quyền -->
         <div class="footer-bottom text-center">
-            <p>&copy; 2024 Chuyên cung cấp thắt lưng các loại. Hotline: <a href="tel:0397526965" class="text-white">0397526965</a></p>
+            <p>&copy; 2025 Chuyên cung cấp thắt lưng các loại. Hotline: <a href="tel:+123 456 768" class="text-white">0397526965</a></p>
         </div>
     </div>
 </footer>
 
-
-
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

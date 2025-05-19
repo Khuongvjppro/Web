@@ -108,7 +108,7 @@ public class CartController extends HttpServlet {
             }
         }
         session.setAttribute("cart", cart);
-        resp.sendRedirect(contextPath + "/home");
+        resp.sendRedirect(contextPath + "/home?added=success");
     }
 
     public static void remove(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
