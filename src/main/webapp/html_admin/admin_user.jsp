@@ -75,11 +75,24 @@
     <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
-                <li><a href="admin_Disboard.jsp"><i class="fa fa-desktop"></i>Dashboard</a></li>
-                <li class="active-link"><a href="#"><i class="fa fa-table"></i>USER</a></li>
-                <li><a href="admin_Products.jsp"><i class="fa fa-edit"></i>PRODUCTS</a></li>
-                <li><a href="admin_Orders.jsp"><i class="fa fa-qrcode"></i>ORDERS</a></li>
-                <li><a href="#"><i class="fa fa-bar-chart-o"></i>Category</a></li>
+                <li>
+          			<a href="admin_Disboard.jsp" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
+        		</li>
+        		<li>
+          			<a href=admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+        		</li>
+        		<li>
+          			<a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
+        		</li>
+        		<li>
+          			<a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
+        		</li>
+        		<li>
+          			<a href="admin_Categories.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
+        		</li>
+        		<li>
+         			 <a href="admin_Inventory.jsp"><i class="fa fa-table"></i>Inventory</a>
+        		</li>
             </ul>
         </div>
     </nav>

@@ -6,7 +6,7 @@ import com.banthatlung.Dao.UserDao;
 import com.banthatlung.Dao.model.Account;
 import com.banthatlung.Dao.model.User;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Map;

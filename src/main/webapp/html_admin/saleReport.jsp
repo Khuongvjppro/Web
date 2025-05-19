@@ -57,7 +57,7 @@
 
 
         <li>
-          <a href="admin_Disboard.jsp" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
+          <a href="admin_Disboard.jsp"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
           <a href=admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
@@ -74,53 +74,53 @@
         <li>
           <a href="admin_Inventory.jsp"><i class="fa fa-table"></i>Inventory</a>
         </li>
+        <li>
+          <a href="saleReport.jsp" class="active-link"><i class="fa fa-table"></i>Sale report</a>
+        </li>
+        
 
       </ul>
     </div>
 
   </nav>
   <!-- /. NAV SIDE  -->
-  <div id="page-wrapper">
+    <div id="page-wrapper">
     <div id="page-inner">
-    <h2 style="text-align:center;">Báo cáo tồn kho sản phẩm theo quý</h2>
-    
-	<!-- Hiển thị thông báo lỗi nếu có -->
-    <c:if test="${not empty errorMessage}">
-        <div style="color: red; text-align: center;">
-            ${errorMessage}
-        </div>
-    </c:if>
-    
-    <c:if test="${empty reports}">
-    	<p style="color:red;text-align:center;">Không có dữ liệu tồn kho để hiển thị.</p>
-	</c:if>
-    
-    <!-- Hiển thị bảng báo cáo tồn kho -->
-    <form action="InventoryServlet" method="get">
-    <table>
-        <thead>
+      <h2 style="text-align:center;">Báo cáo bán hàng theo quý</h2>
+      <form action="SaleReportServlet" method="get" style="text-align:center;">
+        Chọn năm:
+        <input type="number" name="year" value="${year}" min="2000" max="2100" />
+        Chọn quý:
+        <input type="number" name="quarter" value="${quarter}" min="1" max="4" />
+        <input type="submit" value="Xem báo cáo"/>
+      </form>
+
+      <c:if test="${not empty reports}">
+        <table class="table table-bordered">
+          <thead>
             <tr>
-                <th>Mã sản phẩm</th>
-                <th>Số lượng ban đầu</th>
-                <th>Số lượng hiện tại</th>
-                <th>Tình trạng nhập kho</th>
+              <th>Mã SP</th>
+              <th>Tên SP</th>
+              <th>Quý</th>
+              <th>Số lượng bán</th>
+              <th>Doanh thu</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             <c:forEach var="report" items="${reports}">
-                <tr>
-                    <td>${report.getProductID()}</td>
-                    <td>${report.getInitialQuantity()}</td>
-                    <td>${report.getCurrentQuantity()}</td>
-                    <td>${report.getReorderStatus()}</td>
-                </tr>
+              <tr>
+                <td>${report.productID}</td>
+                <td>${report.productName}</td>
+                <td>Q${report.quarter}</td>
+                <td>${report.totalQuantity}</td>
+                <td>${report.totalRevenue}</td>
+              </tr>
             </c:forEach>
-        </tbody>
-    </table>
-    </form>
-    
+          </tbody>
+        </table>
+      </c:if>
+    </div>
   </div>
-</div>
 </div>
 </body>
 </html>
