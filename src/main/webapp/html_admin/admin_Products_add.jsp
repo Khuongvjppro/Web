@@ -83,11 +83,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../home.html">Quản Lý Trang Web Thắt Lưng</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Quản Lý Trang Web Thắt Lưng</a>
             </div>
 
             <span class="logout-spn">
-                  <a href="#" style="color:#fff;">Xin chào admin</a>
+                  <a href="#" style="color:#fff;">Xin chào ${sessionScope.username}</a>
 
                 </span>
         </div>
