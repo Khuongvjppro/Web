@@ -24,20 +24,20 @@ public class SaleReportServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
 		int year = Integer.parseInt(request.getParameter("year"));
         int quarter = Integer.parseInt(request.getParameter("quarter"));
 
         InventoryReportDAO dao = new InventoryReportDAO();
-        List<QuarterlyReport> reports;
+        List<QuarterlyReport> quarterlyReport;
 		try {
-			reports = dao.getQuarterlyReport(year, quarter);
-			request.setAttribute("quarterlyReports", reports);
+			quarterlyReport = dao.getQuarterlyReport(year, quarter);
+			request.setAttribute("quarterlyReport", quarterlyReport);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-        request.getRequestDispatcher("saleReport.jsp").forward(request, response);
+		request.getRequestDispatcher("/html_admin/saleReport.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
