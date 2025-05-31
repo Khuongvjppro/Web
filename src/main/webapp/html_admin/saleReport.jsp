@@ -40,11 +40,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../html/home.jsp">Quản Lý Trang Web Thắt Lưng</a>
+        <a class="navbar-brand" href="../View/home.jsp">Quản Lý Trang Web Thắt Lưng</a>
       </div>
 
       <span class="logout-spn">
-                  <a href="#" style="color:#fff;">Xin chào admin</a>
+                  <a href="#" style="color:#fff;">Xin chào ${sessionScope.username}</a>
 
                 </span>
     </div>
@@ -60,7 +60,7 @@
           <a href="admin_Disboard.jsp"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
-          <a href=admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+          <a href="admin_user.jsp"><i class="fa fa-table "></i>USER<span class="badge"></span></a>
         </li>
         <li>
           <a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
@@ -87,15 +87,15 @@
     <div id="page-wrapper">
     <div id="page-inner">
       <h2 style="text-align:center;">Báo cáo bán hàng theo quý</h2>
-      <form action="SaleReportServlet" method="get" style="text-align:center;">
+      <form action="${pageContext.request.contextPath}/saleReport" method="get" style="text-align:center;">
         Chọn năm:
-        <input type="number" name="year" value="${year}" min="2000" max="2100" />
+        <input type="number" name="year" value="${year}" min="2000" max="2100" required="required"/>
         Chọn quý:
-        <input type="number" name="quarter" value="${quarter}" min="1" max="4" />
+        <input type="number" name="quarter" value="${quarter}" min="1" max="4" required="required"/>
         <input type="submit" value="Xem báo cáo"/>
       </form>
 
-      <c:if test="${not empty reports}">
+      <c:if test="${not empty quarterlyReport}">
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -107,7 +107,7 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach var="report" items="${reports}">
+          	<c:forEach var="report" items="${quarterlyReport}">
               <tr>
                 <td>${report.productID}</td>
                 <td>${report.productName}</td>
@@ -115,7 +115,7 @@
                 <td>${report.totalQuantity}</td>
                 <td>${report.totalRevenue}</td>
               </tr>
-            </c:forEach>
+          	</c:forEach>
           </tbody>
         </table>
       </c:if>

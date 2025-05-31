@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -39,11 +38,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../home.html">Quản Lý Trang Web Thắt Lưsng</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Quản Lý Trang Web Thắt Lưng</a>
       </div>
 
       <span class="logout-spn">
-                  <a href="#" style="color:#fff;">Xin chào admin</a>
+                  <a href="#" style="color:#fff;">Xin chào ${sessionScope.username}</a>
 
                 </span>
     </div>
@@ -56,13 +55,13 @@
         <!--LINK-->
 
         <li>
-          <a href="admin_Disboard.jsp" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
+          <a href="admin_Disboard.jsp"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
           <a href=admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
         </li>
         <li>
-          <a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
+          <a href="admin_Products.jsp" class="active-link"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
         </li>
         <li>
           <a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
@@ -72,6 +71,9 @@
         </li>
         <li>
           <a href="admin_Inventory.jsp"><i class="fa fa-table"></i>Inventory</a>
+        </li>
+        <li>
+          <a href="saleReport.jsp"><i class="fa fa-table"></i>Sale report</a>
         </li>
 
 
@@ -109,23 +111,24 @@
         <%-- Ví dụ: Lặp qua danh sách dữ liệu từ backend --%>
         <c:forEach items="${productList}" var="product">
           <tr>
-            <th scope="row">${product.id}</th>
-            <td><img style="width: 100px; height: auto" src="../images/thatlung4.jpg"></td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.description}</td>
-            <td>${product.quantity}</td>
-            <td>${product.category.name}</td>
-              <%--  <td>${product.brand.name}</td> --%>
-              <%--  <td>${product.material.name}</td> --%>
-              <%--  <td>${product.status}</td> --%>
+            <th scope="row">${product.getId()}</th>
+            <td><img  style="width: 100px; height: auto" src="../images/thatlung4.jpg"></td>
+            <td>${product.getName()}</td>
+            <td>${product.getPrice()}</td>
+            <td>${product.getDescription()}</td>
+            <td>${product.getQuantity()}</td>
+            <td>${product.getCategory().getName()}</td>
+<%--            <td>${product.getBrand}</td>--%>
+<%--            <td>${product.getMaterial()}</td>--%>
+<%--            <td>${product.getStatus}</td>--%>
             <td>
-              <a href="<%=request.getContextPath()%>/admin_Products/edit?id=${product.id}"><i class="fa-solid fa-pen-to-square"></i></a>
-              <a href="<%=request.getContextPath()%>/admin_Products/delete?id=${product.id}"><i class="fa-solid fa-trash"></i></a>
+              <a href="<%=request.getContextPath()%>/admin_Products/edit?id=${product.getId()}"> <i
+                      class="fa-solid fa-pen-to-square"></i></a>
+              <a href="<%=request.getContextPath()%>/admin_Products/delete?id=${product.getId()}"><i
+                      class="fa-solid fa-trash"></i></a>
             </td>
           </tr>
         </c:forEach>
-
         </tbody>
       </table>
 
