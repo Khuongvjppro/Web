@@ -16,7 +16,7 @@ public class Logout extends HttpServlet {
         if (session != null) {
             session.invalidate();
         }
-        resp.sendRedirect(req.getContextPath() +"/View/Login.jsp");
+        resp.sendRedirect("/TTLTW_Project/View/home");
     }
 
     @Override

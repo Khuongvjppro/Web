@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import jakarta.mail.MessagingException;
 import java.io.IOException;
 
 @WebServlet(name = "ForgetPasswordController", urlPatterns = {"/forgot-password"})
@@ -37,7 +38,8 @@ public class ForgetPasswordController extends HttpServlet {
             message = "Vui lòng nhập email!";
         } else {
             // Gọi dịch vụ để xử lý quên mật khẩu
-            boolean result = forgetPasswordService.handleForgotPassword(email);
+            boolean result = false;
+            result = forgetPasswordService.handleForgotPassword(email);
 
             if (result) {
                 typeMessage = "alert-success";
