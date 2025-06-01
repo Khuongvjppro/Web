@@ -12,40 +12,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
 <!--Header-->
 <header class="bg-dark text-white py-3">
     <div class="container d-flex justify-content-between align-items-center">
         <!-- Logo và Trang chủ -->
-        <a href="${pageContext.request.contextPath}/home" class="text-white">
+        <a href="home.jsp" class="text-white">
             <h1 class="m-0">Trang chủ</h1>
         </a>
 
         <!-- Menu điều hướng -->
         <div class="menu d-flex">
-            <a href="${pageContext.request.contextPath}/home" class="text-white">Danh mục sản phẩm</a>
-            <a href="${pageContext.request.contextPath}/aboutUs" class="text-white">Giới thiệu</a>
-            <a href="${pageContext.request.contextPath}/policy" class="text-white">Chính sách</a>
-            <a href="${pageContext.request.contextPath}/contactUs" class="text-white">Liên hệ</a>
+            <a href="danhmucsp.html" class="text-white mx-3">Danh mục sản phẩm</a>
+            <a href="about.jsp" class="text-white mx-3">Giới thiệu</a>
+            <a href="policy.jsp" class="text-white mx-3">Chính sách</a>
+            <a href="contact.jsp" class="text-white mx-3">Liên hệ</a>
         </div>
-
-
         <div class="icons d-flex pt-1"  >
 
             <div class="dropdown pt-1">
                 <a href="#" class="text-white mx-2" id="user-dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <c:if test="${sessionScope.auth ==null}">
-                    <i class="fa-solid fa-user"></i>
+                        <i class="fa-solid fa-user"></i>
                     </c:if>
                     <c:if test="${sessionScope.auth !=null}">
-                    <img src="${pageContext.request.contextPath}/${sessionScope.auth.image}" alt="Avatar" style="width: 30px; height: 30px; border-radius: 50%;">
+                        <img src="${pageContext.request.contextPath}/${sessionScope.auth.image}" alt="Avatar" style="width: 30px; height: 30px; border-radius: 50%;">
                     </c:if>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile">Hồ sơ</a></li>
-                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
+                    <li><a class="dropdown-item" href="Login.jsp">Đăng nhập</a></li>
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/change-password">Đổi mật khẩu</a></li>
                 </ul>
             </div>
@@ -155,22 +152,6 @@
             <button class="btn btn-outline-primary mx-1 my-2" onclick="window.location.href='${pageContext.request.contextPath}/home?page=${i}'">${i}</button>
         </c:forEach>
     </div>
-    <%
-        String added = request.getParameter("added");
-        if ("success".equals(added)) {
-    %>
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Thêm vào giỏ hàng thành công!',
-            text: 'Sản phẩm đã được thêm vào giỏ hàng.',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#3085d6'
-        });
-    </script>
-    <%
-        }
-    %>
 
 </section>
 
