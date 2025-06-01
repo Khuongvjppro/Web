@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.banthatlung.Dao.db.DBConnect2;
 import com.banthatlung.Dao.model.Inventory;
+import com.banthatlung.Dao.model.QuarterlyReport;
 
 public class InventoryReportDAO {
 
@@ -23,24 +24,43 @@ public class InventoryReportDAO {
      * @return List<ProductInventoryReport>
      * @throws SQLException
      */
-    public List<Inventory> getQuarterlyReport() throws SQLException {
-        List<Inventory> reports = new ArrayList<>();
+    public List<QuarterlyReport> getQuarterlyReport(int year, int quarter) throws SQLException {
+    	 List<QuarterlyReport> list = new ArrayList<>();
 
-        //bảng warehouse lưu thông tin cho từng sản phẩm, gồm product_id, initial_quantity và quantity hiện tại
-        String sql = "SELECT product_id, initial_quantity, quantity FROM warehouse";
-        try (PreparedStatement stmt = DBConnect2.getPreparedStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+         String sql = """
+             SELECT QUARTER(o.orderDate) AS quarter,
+                 p.id AS product_id,
+                 p.name AS product_name,
+                 SUM(od.quantity) AS total_quantity,
+                 SUM(od.quantity * od.price) AS total_revenue
+         	FROM orders o
+         	JOIN order_details od ON o.id = od.id
+         	JOIN products p ON od.id = p.id
+         	WHERE YEAR(o.orderDate) = ? AND QUARTER(o.orderDate) = ?
+         	GROUP BY quarter, p.id
+         	ORDER BY quarter, p.id;
+         """;
 
-            while(rs.next()){
-                int productId = rs.getInt("product_id");
-                int initialQuantity = rs.getInt("initial_quantity");
-                int currentQuantity = rs.getInt("quantity");
+         try (PreparedStatement stmt = DBConnect2.getPreparedStatement(sql)) {
+             stmt.setInt(1, year);
+             stmt.setInt(2, quarter);
+             ResultSet rs = stmt.executeQuery();
 
-                Inventory report = new Inventory(productId, initialQuantity, currentQuantity);
-                reports.add(report);
-            }
-        }
-        return reports;
+             while (rs.next()) {
+                 QuarterlyReport qr = new QuarterlyReport();
+                 qr.setQuarter(rs.getInt("quarter"));
+                 qr.setProductID(rs.getInt("product_id"));
+                 qr.setProductName(rs.getString("product_name"));
+                 qr.setTotalQuantity(rs.getInt("total_quantity"));
+                 qr.setTotalRevenue(rs.getDouble("total_revenue"));
+                 list.add(qr);
+             }
+
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+
+         return list;
     }
     
     public List<Inventory> getInventoryReport() {
@@ -91,8 +111,7 @@ public class InventoryReportDAO {
     public static void main(String[] args) throws SQLException {
 		InventoryReportDAO dao = new InventoryReportDAO();
 		
-		for (Inventory i : dao.getInventoryReport()) {
-			System.out.println(i);
-		}
+		System.out.println(dao.getInventoryReport());
+		System.out.println(dao.getQuarterlyReport(2025, 1));
 	}
 }
