@@ -4,319 +4,169 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkOut.css">
     <style>
-        <%@include file="../css/footer.css" %>
-    </style>
-    <style>
-        <%@include file="../css/header.css" %>
-    </style>
-    <style>
-        <%@include file="../css/thanhtoan.css" %>
-    </style>
-    <style>
-        <%@include file="../asset/css/bootstrap.css" %>
-    </style>
-    <script>
-        window.onload = function () {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success, error);
-            } else {
-                alert("Trình duyệt của bạn không hỗ trợ định vị.");
-            }
-        };
-
-        function success(position) {
-            var lat = position.coords.latitude;
-            var lon = position.coords.longitude;
-            console.log("Latitude:", lat, "Longitude:", lon);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "LocationServlet?lat=" + lat + "&lon=" + lon, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        console.log("Response from servlet:", xhr.responseText);
-                        document.getElementById("address").innerHTML = xhr.responseText;
-                    } else {
-                        document.getElementById("address").innerHTML =
-                            "<option value=''>Không thể lấy địa chỉ từ máy chủ</option>";
-                    }
-                }
-            };
-            xhr.send();
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0; padding: 0;
         }
-
-        function error() {
-            alert("Không thể lấy vị trí. Hãy bật định vị hoặc thử trình duyệt khác.");
-            document.getElementById("address").innerHTML =
-                "<option value=''>Vui lòng nhập địa chỉ thủ công</option>";
+        .checkout-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-    </script>
+        .checkout-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .checkout-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .order-summary, .payment-form {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px;
+            background-color: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .order-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+        .order-summary li {
+            padding: 5px 0;
+            font-size: 16px;
+        }
+        .order-summary .total {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .payment-form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .payment-form input, .payment-form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .payment-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .payment-form button:hover {
+            background-color: #218838;
+        }
+        .payment-form p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
+
 </head>
 <body>
-<header>
-    <div id="fullscreen-search" class="fullscreen-search">
-        <span class="close-btn">&times;</span>
-        <div class="search-container">
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search..">
-                <button class="search-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="header">
-        <a href="home.html"><h1>Trang chủ</h1></a>
-        <div class="menu">
-            <div class="dropdown">
-                <a href="danhmucsp.html">Danh mục sản phẩm</a>
-                <div class="dropdown-content">
-                    <a href="#">Thắt lưng nam</a>
-                    <a href="#">Thắt lưng nữ</a>
-                </div>
-            </div>
-            <a href="#">Giới thiệu</a>
-            <a href="#">Chính sách </a>
-            <a href="#">Liên hệ</a>
-        </div>
-        <div class="icons">
-            <a href="#" id="open-search"><i class="fa-solid fa-magnifying-glass"></i></a>
-            <div class="dropdown-user">
-                <a href="profile.html"><i class="fa-solid fa-user"></i></a>
-                <div class="dropdown-content-user">
-                    <a href="Login.html">Đăng nhập</a>
-                </div>
-            </div>
-            <a href="Cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
-        </div>
-    </div>
-</header>
-<script src="../fullscreensearch.js"></script>
-
-<main class="checkout-container">
-    <h2>Thanh toán</h2>
-    <div class="checkout-content">
-        <!-- Order Summary -->
-        <div class="order-summary">
-            <h3>Các sản phẩm: </h3>
-            <ul>
-                <c:if test="${cart != null}">
-                <%
-                    int total = 0;
-                    HashMap<Integer, ProductCart> carts = (HashMap<Integer, ProductCart>) request.getAttribute("cart");
-                    for (Map.Entry<Integer, ProductCart> entry : carts.entrySet()) {
-                        Integer key = entry.getKey();
-                        ProductCart value = entry.getValue();
-                        total += value.getQuantity() * value.getProduct().getPrice();
-                %>
-                <li> - <%= value.getProduct().getName()%><span><%= value.getProduct().getPrice()%></span>x <%= value.getQuantity()%></li>
-
-                <% } %>
-
-                <li class="total">Tổng cộng :<span><%=total%></span></li>
-            </ul>
-        </div>
+<h2>Thanh toán</h2>
+<div>
+    <h3>Các sản phẩm:</h3>
+    <ul>
+        <c:if test="${cart != null}">
+            <%
+                HashMap<Integer, ProductCart> carts = (HashMap<Integer, ProductCart>) request.getAttribute("cart");
+                for (Map.Entry<Integer, ProductCart> entry : carts.entrySet()) {
+                    ProductCart value = entry.getValue();
+            %>
+            <li><%= value.getProduct().getName() %> - <%= value.getProduct().getPrice() %> x <%= value.getQuantity() %></li>
+            <% } %>
+            <li>Tổng cộng: <%= request.getAttribute("total") %> VND</li>
         </c:if>
-        <!-- Payment Form -->
-        <div class="payment-form">
-            <h3>Chi tiết đơn hàng </h3>
-            <form method="POST">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Tên </label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Loại sản phẩm">
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">SDT</label>
-                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Mô tả">
-                </div>
-                <div class="form-group">
-                    <label for="province">Tỉnh/Thành phố</label>
-                    <select id="province" class="form-control" onchange="loadDistricts()"></select>
-                </div>
+    </ul>
+</div>
 
-                <div class="form-group">
-                    <label for="district">Quận/Huyện</label>
-                    <select id="district" class="form-control" onchange="loadWards()"></select>
-                </div>
+<form method="POST">
+    <input type="text" name="name" placeholder="Tên">
+    <input type="text" name="phone" placeholder="SDT">
+    <select id="province" name="province" onchange="loadDistricts();updateShippingFee()"></select>
+    <select id="district" name="district" onchange="loadWards()"></select>
+    <select id="ward" name="ward"></select>
+    <p>Phí ship: <span id="shippingFee">0</span> VND</p>
+    <p>Tổng cộng: <span id="totalAmount"><%= request.getAttribute("total") %></span> VND</p>
+    <input type="hidden" name="totalAmount" id="totalAmountInput" value="<%= request.getAttribute("total") %>">
+    <button type="submit">Submit</button>
+</form>
 
-                <div class="form-group">
-                    <label for="ward">Phường/Xã</label>
-                    <select id="ward" class="form-control"></select>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
-        </div>
-    </div>
-</main>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-brand">
-        <p>CHUYÊN CUNG CẤP CÁC LOẠI THẮT LƯNG.</p>
-        <p> Chất lượng - Uy tín - Tin cậy</p>
-        <div class="social-icons">
-            <a href="https://www.facebook.com" target="_blank">
-                <img src="../asset/image/icons8-facebook-48.png" alt="Facebook">
-                <a href="https://www.instagram.com" target="_blank">
-                    <img src="../asset/image/logoInsta.png" alt="Instagram">
-                </a>
-                <a href="https://www.youtube.com" target="_blank">
-                    <img src="../asset/image/logoytb.jpg" alt="YouTube">
-                </a>
-                <a href="https://www.twitter.com" target="_blank">
-                    <img src="../asset/image/twitter.jpg" alt="Twitter">
-                </a></a></div>
-    </div>
-    <div class="footer-container">
-        <!-- Logo và mạng xã hội -->
-
-        <div class="footer-brand">
-            <img src="../asset/image/logoSaleNoti.png" alt="Logo" class="footer-logo">
-            <p>Chất lượng - Uy tín - Tin cậy</p>
-            <div class="social-icons">
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-solid fa-phone"></i>
-                <i class="fa-brands fa-youtube"></i>
-            </div>
-        </div>
-
-        <!-- Danh sách liên kết -->
-        <div class="footer-links">
-            <div>
-                <h3>Sản phẩm</h3>
-                <ul>
-                    <li><a href="#">Thắt lưng nam</a></li>
-                    <li><a href="#">Thắt lưng nữ</a></li>
-                    <li><a href="#">Phụ kiện</a></li>
-                    <li><a href="#">Khuyến mãi</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3>Chính sách</h3>
-                <ul>
-                    <li><a href="#">Chính sách đổi trả</a></li>
-                    <li><a href="#">Chính sách bảo mật</a></li>
-                    <li><a href="#">Chính sách vận chuyển</a></li>
-                    <li><a href="#">Hướng dẫn thanh toán</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3>Hỗ trợ</h3>
-                <ul>
-                    <li><a href="#">Liên hệ</a></li>
-                    <li><a href="#">Hỗ trợ</a></li>
-                    <li><a href="#">Tuyển dụng</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Thông tin công ty -->
-        <div class="footer-contact">
-            <h3>Liên hệ</h3>
-            <p>Địa chỉ: Số 8, Tam Bình, Thủ Đức</p>
-            <p>Điện thoại: 0397526965</p>
-            <p>Email: storethatlung@gmail.com</p>
-            <p>Thời gian làm việc: 8:00 - 22:00 (hàng ngày)</p>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2024 Chuyên cung cấp thắt lưng các loại. Hotline: <a href="tel:0397526965">0397526965</a></p>
-    </div>
-</footer>
 <script>
+    // Đoạn JS load tỉnh/quận/phường từ API và tính phí ship
     let provinceData = [];
-
     fetch('<%=request.getContextPath()%>/api/locations')
         .then(res => res.json())
         .then(rawData => {
-            // Convert object to array
-            provinceData = Object.entries(rawData).map(([provinceCode, provinceObj]) => ({
-                code: provinceCode,
-                name: provinceObj.name,
-                districts: Object.entries(provinceObj["quan-huyen"]).map(([districtCode, districtObj]) => ({
-                    code: districtCode,
-                    name: districtObj.name,
-                    wards: Object.entries(districtObj["xa-phuong"]).map(([wardCode, wardObj]) => ({
-                        code: wardCode,
-                        name: wardObj.name
-                    }))
+            provinceData = Object.entries(rawData).map(([code, obj]) => ({
+                name: obj.name,
+                districts: Object.entries(obj["quan-huyen"]).map(([dCode, dObj]) => ({
+                    name: dObj.name,
+                    wards: Object.entries(dObj["xa-phuong"]).map(([wCode, wObj]) => ({ name: wObj.name }))
                 }))
             }));
-
-            // Load tỉnh
             const provinceSelect = document.getElementById("province");
-            provinceData.forEach((province, i) => {
+            provinceData.forEach((p, i) => {
                 const opt = document.createElement("option");
-                opt.value = i;
-                opt.text = province.name;
-                provinceSelect.appendChild(opt);
+                opt.value = i; opt.text = p.name; provinceSelect.appendChild(opt);
             });
-        })
-        .catch(err => {
-            console.error("Lỗi tải JSON:", err);
-            alert("Không thể tải dữ liệu địa phương!");
         });
 
     function loadDistricts() {
-        const provinceIndex = document.getElementById("province").value;
-
-        // Debug dữ liệu:
-        console.log("provinceIndex =", provinceIndex);
-        console.log("provinceData =", provinceData);
-        console.log("provinceData[provinceIndex] =", provinceData[provinceIndex]);
-
-        const districtSelect = document.getElementById("district");
-        const wardSelect = document.getElementById("ward");
-
-        districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
-        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
-
-        if (provinceIndex === "") return;
-
-        const province = provinceData[provinceIndex];
-        if (!province || !province.districts) {
-            alert("Không có dữ liệu quận/huyện cho tỉnh được chọn");
-            return;
-        }
-
-        province.districts.forEach((district, i) => {
-            const opt = document.createElement("option");
-            opt.value = i;
-            opt.text = district.name;
-            districtSelect.appendChild(opt);
+        const index = document.getElementById("province").value;
+        const district = document.getElementById("district"), ward = document.getElementById("ward");
+        district.innerHTML = '<option>Chọn</option>'; ward.innerHTML = '<option>Chọn</option>';
+        if (index === "") return;
+        provinceData[index].districts.forEach((d, i) => {
+            const opt = document.createElement("option"); opt.value = i; opt.text = d.name; district.appendChild(opt);
         });
     }
 
     function loadWards() {
-        const provinceIndex = document.getElementById("province").value;
-        const districtIndex = document.getElementById("district").value;
-        const wardSelect = document.getElementById("ward");
-
-        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
-
-        if (provinceIndex === "" || districtIndex === "") return;
-
-        const wards = provinceData[provinceIndex].districts[districtIndex].wards;
-        wards.forEach((ward) => {
-            const opt = document.createElement("option");
-            opt.value = ward.code;
-            opt.text = ward.name;
-            wardSelect.appendChild(opt);
+        const pIndex = document.getElementById("province").value;
+        const dIndex = document.getElementById("district").value;
+        const ward = document.getElementById("ward"); ward.innerHTML = '<option>Chọn</option>';
+        if (pIndex === "" || dIndex === "") return;
+        provinceData[pIndex].districts[dIndex].wards.forEach(w => {
+            const opt = document.createElement("option"); opt.text = w.name; ward.appendChild(opt);
         });
+    }
+
+    function updateShippingFee() {
+        const index = document.getElementById("province").value;
+        const shippingFee = document.getElementById("shippingFee");
+        const totalAmount = document.getElementById("totalAmount");
+        const totalInput = document.getElementById("totalAmountInput");
+        let baseTotal = parseInt(<%= request.getAttribute("total") %>);
+        if (index === "") { shippingFee.innerText = 0; totalAmount.innerText = baseTotal; totalInput.value = baseTotal; return; }
+        const province = provinceData[index].name;
+        const fees = {"Hà Nội":20000,"Hồ Chí Minh":25000,"default":35000};
+        const fee = fees[province] || fees["default"];
+        shippingFee.innerText = fee;
+        const total = baseTotal + fee;
+        totalAmount.innerText = total; totalInput.value = total;
     }
 </script>
 </body>

@@ -166,10 +166,6 @@
                         <div class="summary">
                             <h3>Thông tin đơn hàng</h3>
 
-                            <div class="summary-item"><span class="text">Giảm giá</span><span class="price">0 ₫</span>
-                            </div>
-                            <div class="summary-item"><span class="text">Chi phí vận chuyển</span><span class="price">0 ₫</span>
-                            </div>
                             <div class="summary-item"><span class="text">Tổng cộng </span><span
                                     class="price"> <%= total%></span>
                             </div>
