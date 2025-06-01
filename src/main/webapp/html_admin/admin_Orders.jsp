@@ -38,11 +38,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../home.html">Quản Lý Trang Web Thắt Lưng</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Quản Lý Trang Web Thắt Lưng</a>
             </div>
 
             <span class="logout-spn">
-                  <a href="#" style="color:#fff;">Xin chào admin</a>
+                  <a href="#" style="color:#fff;">Xin chào ${sessionScope.username}</a>
 
                 </span>
         </div>
@@ -55,7 +55,7 @@
                 <!--LINK-->
 
                 <li>
-          <a href="admin_Disboard.jsp" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
+          <a href="admin_Disboard.jsp"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
           <a href=admin_user.jsp ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
@@ -64,13 +64,16 @@
           <a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
         </li>
         <li>
-          <a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
+          <a href="admin_Orders.jsp" class="active-link"><i class="fa fa-qrcode "></i>ORDERS</a>
         </li>
         <li>
           <a href="admin_Categories.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
         </li>
         <li>
           <a href="admin_Inventory.jsp"><i class="fa fa-table"></i>Inventory</a>
+        </li>
+        <li>
+          	<a href="saleReport.jsp"><i class="fa fa-table"></i>Sale report</a>
         </li>
 
             </ul>

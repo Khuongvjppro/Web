@@ -35,11 +35,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../home.html">Quản Lý Trang Web Thắt Lưng</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Quản Lý Trang Web Thắt Lưng</a>
       </div>
 
       <span class="logout-spn">
-                  <a href="#" style="color:#fff;">Xin chào admin</a>
+                  <a href="#" style="color:#fff;">Xin chào ${sessionScope.username}</a>
 
                 </span>
     </div>
@@ -57,7 +57,7 @@
 
 
         <li>
-          <a href=<%=request.getContextPath()%>/admin_Users ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+         	<a href=<%=request.getContextPath()%>/admin_user><i class="fa fa-table "></i>USER<span class="badge"></span></a>
         </li>
         <li>
           <a href="<%=request.getContextPath()%>/admin_Products"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
@@ -71,7 +71,10 @@
         <li>
           <a href="<%=request.getContextPath()%>/admin_Brands" class="active-link"><i class="fa fa-edit "></i>Brands</a>
         </li>
-        <a href="/fake_war_exploded/admin_Brands"><i class="fa fa-edit "></i>Brands</a>
+        	<a href="/fake_war_exploded/admin_Brands"><i class="fa fa-edit "></i>Brands</a>
+        </li>
+        <li>
+          <a href="admin_Inventory.jsp"><i class="fa fa-table"></i>Inventory</a>
         </li>
 
       </ul>
