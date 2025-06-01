@@ -13,6 +13,8 @@ public class Inventory {
     private double consumptionPercent;
     private String reorderStatus; // "Cần nhập kho", "Nên nhập kho", "Không cần nhập kho"
 
+    public Inventory() {}
+    
 	public Inventory(int productId, int initialQuantity, int currentQuantity) {
 		this.productID = productId;
 		this.initialQuantity = initialQuantity;
@@ -63,7 +65,7 @@ public class Inventory {
 	public String toString() {
 		return "Product ID: " + this.productID + "\n" +
 				"Initial quantity: " + this.initialQuantity + ", current quantity: " + this.currentQuantity + "\n" +
-				"Status: " + this.reorderStatus;
+				"Status: " + this.reorderStatus + "\n";
 	}
 
 }

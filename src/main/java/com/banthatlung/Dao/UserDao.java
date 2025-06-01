@@ -14,7 +14,7 @@ public class UserDao {
 
     private User mapUser(ResultSet rs) throws SQLException {
         return new User(
-                rs.getInt(1),
+        		rs.getInt(1),
                 rs.getString(2),  // accountID
                 rs.getString(3),  // full_name
                 rs.getString(4),  // email
@@ -39,21 +39,21 @@ public class UserDao {
         }
         return result;
     }
-
+    
     public Map<String, Account> getAccountAndUser() {
-        Map<String, Account> result = new HashMap<String, Account>();
-        result.clear();
-        AccountDAO dao = new AccountDAO();
-        List<Account> accounts = dao.getAll();
-        List<User> users = getAll();
-        for (User u : users) {
-            for (Account a : accounts) {
-                if (u.getAccountID().equals(a.getId())) {
-                    result.put(u.getAccountID(), a);
-                }
-            }
-        }
-        return result;
+    	Map<String, Account> result = new HashMap<String, Account>();
+    	result.clear();
+    	AccountDAO dao = new AccountDAO();
+    	List<Account> accounts = dao.getAll();
+    	List<User> users = getAll();
+    	for (User u : users) {
+    		for (Account a : accounts) {
+    			if (u.getAccountID().equals(a.getId())) {
+    				result.put(u.getAccountID(), a);
+    			}
+    		}
+    	}
+		return result;
     }
 
     // Tìm người dùng theo tên đăng nhập
@@ -119,10 +119,10 @@ public class UserDao {
         }
         return false;
     }
-
+    
     // Đăng ký người dùng mới
     public void registerUser(User u) throws SQLException {
-        String sql = "INSERT INTO users (account_id, full_name, email, phone_number) VALUES (?, ?, ?, ?)";
+    	String sql = "INSERT INTO users (account_id, full_name, email, phone_number) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = DBConnect2.getPreparedStatement(sql)) {
             stmt.setString(1, u.getAccountID());
             stmt.setString(2, u.getName());
@@ -145,13 +145,13 @@ public class UserDao {
         }
         return 0;
     }
-
+    
     public static void main(String[] args) throws SQLException {
         UserDao userDao = new UserDao();
-
+        
         Map<String, Account> map = userDao.getAccountAndUser();
         for (User u : userDao.getAll()) {
-            System.out.println(u + "\n" + map.get(u.getAccountID()));
+        	System.out.println(u + "\n" + map.get(u.getAccountID()));
         }
     }
 }

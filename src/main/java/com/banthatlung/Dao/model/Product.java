@@ -148,4 +148,10 @@ public class Product implements Serializable {
     public void setMaterial(Material material) {
         this.material = material;
     }
+    
+    @Override
+	public String toString() {
+		return "Product ID: " + this.id + ", Name: " + this.name + ", Price: " + this.price + "\n" +
+				"Description: " + this.description + ", quantity: " + this.quantity + ", status: " +this.status;
+	}
 }

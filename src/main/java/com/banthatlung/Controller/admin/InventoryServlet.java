@@ -23,6 +23,6 @@ public class InventoryServlet extends HttpServlet {
 		request.setAttribute("reports", reports);
 
         // Forward request sang JSP hiển thị báo cáo
-        request.getRequestDispatcher(request.getContextPath() + "/admin_Inventory.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin_Inventory").forward(request, response);
     }
 }

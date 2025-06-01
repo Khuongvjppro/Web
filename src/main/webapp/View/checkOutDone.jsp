@@ -19,7 +19,7 @@
         <div class="card-body text-center">
           <p class="lead">Cảm ơn bạn đã mua hàng</p>
           <p>Đơn hàng của bạn sẽ được chúng tôi vận chuyển sớm</p>
-          <a href="home.jsp" class="btn btn-primary mt-3">Về trang chủ</a>
+          <a href="${pageContext.request.contextPath}/home" class="btn btn-primary mt-3">Về trang chủ</a>
 <%--          <a href="order-details.jsp" class="btn btn-secondary mt-3">View Order Details</a>--%>
         </div>
       </div>

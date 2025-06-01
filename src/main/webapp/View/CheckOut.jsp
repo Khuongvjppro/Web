@@ -26,6 +26,42 @@
     <style>
         <%@include file="../asset/css/bootstrap.css" %>
     </style>
+    <script>
+        window.onload = function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, error);
+            } else {
+                alert("Trình duyệt của bạn không hỗ trợ định vị.");
+            }
+        };
+
+        function success(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            console.log("Latitude:", lat, "Longitude:", lon);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "LocationServlet?lat=" + lat + "&lon=" + lon, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log("Response from servlet:", xhr.responseText);
+                        document.getElementById("address").innerHTML = xhr.responseText;
+                    } else {
+                        document.getElementById("address").innerHTML =
+                            "<option value=''>Không thể lấy địa chỉ từ máy chủ</option>";
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        function error() {
+            alert("Không thể lấy vị trí. Hãy bật định vị hoặc thử trình duyệt khác.");
+            document.getElementById("address").innerHTML =
+                "<option value=''>Vui lòng nhập địa chỉ thủ công</option>";
+        }
+    </script>
 </head>
 <body>
 <header>

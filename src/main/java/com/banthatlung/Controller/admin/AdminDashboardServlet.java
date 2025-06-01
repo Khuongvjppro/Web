@@ -11,7 +11,7 @@ public class AdminDashboardServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Kiểm tra quyền admin
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(true);
         if (session == null || !"1".equals(session.getAttribute("role"))) {
             response.sendRedirect("/TTLTW_Project/View/Login.jsp");
             return;
