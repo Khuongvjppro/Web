@@ -64,5 +64,6 @@ public class CheckOutController extends HttpServlet {
         session.setAttribute("cart", null);
         resp.sendRedirect(req.getContextPath() + "/View/checkOutDone.jsp");
     }
+
 }
 

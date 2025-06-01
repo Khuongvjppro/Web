@@ -180,6 +180,26 @@
         </form>
     </div>
 </div>
+<h3>Sản phẩm liên quan</h3>
+<div class="related-products" style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+    <c:forEach var="p" items="${relatedProducts}">
+        <div class="product-item" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px; width: 200px; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+            <img src="${p.image}" alt="${p.name}" style="width:100%; height:150px; object-fit:cover; border-radius:4px;">
+            <h4 style="font-size: 16px; margin:10px 0 5px;">${p.name}</h4>
+            <p style="color:#ff6600; font-weight: bold; font-size: 14px;">
+                <fmt:formatNumber value="${p.price}" type="number" groupingUsed="true"/> VNĐ
+            </p>
+            <a href="${pageContext.request.contextPath}/product?pid=${p.id}" style="color: #007bff; text-decoration: none; font-size:14px;">Xem chi tiết</a>
+            <br/>
+            <form action="${pageContext.request.contextPath}/Cart" method="post">
+                <input type="hidden" name="id" value="${p.id}"/>
+                <input type="hidden" name="quantity" value="1"/>
+                <button type="submit" style="background-color: #28a745; color: white; border: none; padding: 5px 10px; margin-top: 5px; border-radius:4px;">Thêm vào giỏ</button>
+            </form>
+        </div>
+    </c:forEach>
+</div>
+
 
 
 <!-- Footer -->
