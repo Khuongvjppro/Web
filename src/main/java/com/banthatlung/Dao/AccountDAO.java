@@ -44,7 +44,7 @@ public class AccountDAO {
 	public boolean createAccount(Account account) throws SQLException {
         String sql = "INSERT INTO accounts (account_id, username, password) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = DBConnect2.getPreparedStatement(sql)) {
-        	stmt.setString(1,"u" + (generateID() + 1));
+            stmt.setString(1,"u" + (generateID() + 1));
             stmt.setString(2, account.getUsername());
             stmt.setString(3, account.getPass());
             return stmt.executeUpdate() > 0;
@@ -128,17 +128,51 @@ public class AccountDAO {
         return null;
     }
     
+    public int getAccountRole(String accountID) {
+    	int result = 0;
+    	String sql = "SELECT r.role\r\n"
+    			+ "FROM roles r\r\n"
+    			+ "JOIN accounts a ON r.account_id = a.account_id\r\n"
+    			+ "WHERE a.account_id = ?;";
+    	try (PreparedStatement stmt = DBConnect2.getPreparedStatement(sql)) {
+            stmt.setString(1, accountID);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                result = rs.getInt("role");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    	return result;
+    }
+    
 	public static void main(String[] args) throws SQLException {
 		AccountDAO dao = new AccountDAO();
 		
-		dao.updatePassword("u11", "456");
 		for (Account a : dao.getAll()) {
 			System.out.println(a);
 		}
+		System.out.println(dao.getAccountIdByUsername("frank"));
 		System.out.println(dao.findAccount("frank"));
-		System.out.println(dao.login("abc", "111"));
+		System.out.println(dao.login("aaa", "111"));
 		System.out.println(dao.login("frank", "111"));
 		System.out.println(dao.login("frank", "123"));
+		System.out.println(dao.getAccountRole("u101"));
+		System.out.println(dao.login("newadmin", "123"));
+	}
+
+	public String getAccountIdByUsername(String username) {
+		 String sql = "SELECT account_id FROM accounts WHERE username = ?";
+		    try (PreparedStatement stmt = DBConnect2.getPreparedStatement(sql)) {
+		        stmt.setString(1, username);
+		        ResultSet rs = stmt.executeQuery();
+		        if (rs.next()) {
+		            return rs.getString("account_id");
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return null;
 	}
 
 }

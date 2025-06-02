@@ -28,6 +28,9 @@ public class ProductService {
     public static void DeleteProduct(int id) throws SQLException {
         productDao.delete(id);
     }
+    public List<Product> getRelatedProducts(int categoryId, int excludeProductId) {
+        return productDao.getRelatedProducts(categoryId, excludeProductId);
+    }
 
     public List<Product> getAll() {
         return productDao.getAll();

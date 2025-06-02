@@ -68,9 +68,12 @@
     </div>
 </header>
 
+<!--Bị vô hiệu không còn tồn tại nữa -->
+<!--Giải pháp thay thế tìm 1 thư viện chatbot khác-->
 <!--Start TaggoAI-->
 <script async data-taggo-botid="67e8452738ab1a31880dfc7d" src="https://widget.taggo.chat/v2.js"></script>
 <!--End TaggoAI-->
+
 <section id="feature" class="container py-5">
     <div class="row text-center">
         <div class="col-md-2">
@@ -112,7 +115,7 @@
                     <!-- Link đến chi tiết sản phẩm -->
                     <a href=" ${pageContext.request.contextPath}/product?pid=${product.id != null ? product.id : 'default'}">
                         <!-- Hình ảnh sản phẩm với kiểm tra dữ liệu -->
-                        <img src="../images/thatlung1.jpg"
+                        <img src="${pageContext.request.contextPath}/images/thatlung1.jpg"
                              class="card-img-top"
                              alt="${product.name != null ? product.name : 'Sản phẩm không có tên'}"
                              style="object-fit: cover; height: 200px; width: 100%;">
@@ -151,6 +154,22 @@
         </c:forEach>
     </div>
 
+    <%
+        String added = request.getParameter("added");
+        if ("success".equals(added)) {
+    %>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Thêm vào giỏ hàng thành công!',
+            text: 'Sản phẩm đã được thêm vào giỏ hàng.',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#3085d6'
+        });
+    </script>
+    <%
+        }
+    %>
 
     <div class="pagination justify-content-center flex-wrap">
         <!-- Các nút phân trang -->

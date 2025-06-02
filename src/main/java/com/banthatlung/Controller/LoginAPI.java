@@ -9,9 +9,9 @@ import jakarta.servlet.http.Cookie;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import org.json.*;
+import org.json.JSONObject;
 
-@WebServlet(name = "LoginController", value = "/loginAPI")
+@WebServlet(name = "LoginAPI", value = "/loginAPI")
 public class LoginAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

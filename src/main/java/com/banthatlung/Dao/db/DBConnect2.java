@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBConnect2 {
-    static String url = "jdbc:mysql://"+DBProperties.host()+":"+DBProperties.port()+"/"+DBProperties.dbName()+"?"+DBProperties.option();
+    static String url = "jdbc:mysql://localhost:3306/shop_that_lung";
+    private static final String USER = "root";
+	private static final String PASSWORD = "";
     static Connection conn;
     public static Statement get() {
         try {
@@ -33,7 +35,7 @@ public class DBConnect2 {
 
     private static void makeConnect() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection(url,DBProperties.username(),DBProperties.password());
+        conn = DriverManager.getConnection(url, USER, PASSWORD);
     }
 
     public static void main(String[] args) throws SQLException {

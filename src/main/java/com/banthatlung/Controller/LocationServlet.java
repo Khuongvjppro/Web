@@ -8,8 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class LocationServlet extends HttpServlet {
-
-    private static final String BASE_API = "https://provinces.open-api.vn/api";
+	private static final long serialVersionUID = 1L;
+	private static final String BASE_API = "https://provinces.open-api.vn/api";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
