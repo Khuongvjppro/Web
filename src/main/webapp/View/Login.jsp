@@ -75,13 +75,10 @@
         <div style="color: red; text-align: center;">${error}</div>
     </c:if>
     <form action="${pageContext.request.contextPath}/login" method="post">
-        <label for="email">Tên tài khoản</label>
-        <input type="text" id="email" name="uname" required>
-
-        <label for="password">Mật khẩu</label>
-        <input type="password" id="password" name="pass" required>
-
-        <button type="submit" class="btn">Đăng nhập</button>
+        <input type="hidden" name="type"/>
+    	Username: <input type="text" name="username" />
+    	Password: <input type="password" name="password" />
+    	<button type="submit" class="btn">Đăng nhập</button>
     </form>
 
     <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid&redirect_uri=http://localhost:8080/projectl_war_exploded/login&response_type=code&client_id=911076308152-ecrt2m1eksasdgf9dqqug578lqk2j5p7.apps.googleusercontent.com&approval_prompt=force"
@@ -97,6 +94,19 @@
         Đăng nhập với Google
     </a>
     <a href="https://www.facebook.com/v22.0/dialog/oauth?client_id=1002836298038356&redirect_uri=http://localhost:8080/projectl/login"
+       style="display: flex; justify-content: center; align-items: center;
+   margin-top: 15px; padding: 10px; background-color: #1877F2;
+   color: #fff; text-decoration: none;
+   border-radius: 4px; font-weight: bold;
+   border: 1px solid #e0e0e0;
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/1200px-Facebook_f_logo_%282019%29.svg.png"
+             alt="Facebook logo"
+             style="width: 20px; height: 20px; margin-right: 10px;">
+        Đăng nhập với Facebook
+    </a>
+
+	<a href="https://www.facebook.com/v22.0/dialog/oauth?client_id=1002836298038356&redirect_uri=http://localhost:8080/projectl/login"
        style="display: flex; justify-content: center; align-items: center;
    margin-top: 15px; padding: 10px; background-color: #1877F2;
    color: #fff; text-decoration: none;

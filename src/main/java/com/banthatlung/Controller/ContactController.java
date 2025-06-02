@@ -29,4 +29,3 @@ public class ContactController extends HttpServlet {
         req.getRequestDispatcher("/View/contact.jsp").forward(req, resp);
     }
 }
-

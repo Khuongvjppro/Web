@@ -13,5 +13,3 @@
         <url-pattern>/api/location</url-pattern>
     </servlet-mapping>
 </web-app>
-
-

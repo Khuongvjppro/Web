@@ -4,7 +4,6 @@ import com.banthatlung.Dao.InventoryReportDAO;
 import com.banthatlung.Dao.model.Inventory;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -16,19 +15,14 @@ public class InventoryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            // Khởi tạo DAO và lấy danh sách báo cáo tồn kho
-            InventoryReportDAO reportDAO = new InventoryReportDAO();
-            List<Inventory> reports = reportDAO.getQuarterlyReport();
+        // Khởi tạo DAO và lấy danh sách báo cáo tồn kho
+		InventoryReportDAO reportDAO = new InventoryReportDAO();
+		List<Inventory> reports = reportDAO.getInventoryReport();
 
-            // Đưa danh sách báo cáo vào request scope
-            request.setAttribute("reports", reports);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("errorMessage", "Lỗi kết nối Database: " + e.getMessage());
-        }
+		// Đưa danh sách báo cáo vào request scope
+		request.setAttribute("reports", reports);
 
         // Forward request sang JSP hiển thị báo cáo
-        request.getRequestDispatcher(request.getContextPath() + "/admin_Inventory.jsp").forward(request, response);
+        request.getRequestDispatcher("/admin_Inventory").forward(request, response);
     }
 }

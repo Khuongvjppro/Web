@@ -208,6 +208,34 @@ public class ProductDao {
         ps.setInt(9, product.getMaterial().getId());
 
     }
+    // Lấy danh sách sản phẩm liên quan dựa trên category_id (hoặc brand_id)
+    public List<Product> getRelatedProducts(int categoryId, int excludeProductId) {
+        List<Product> result = new ArrayList<>();
+        String sql = """
+            SELECT p.*, 
+                   c.id AS category_id, c.name AS category_name,
+                   b.id AS brand_id, b.name AS brand_name,
+                   m.id AS material_id, m.name AS material_name
+            FROM products p
+            JOIN categories c ON p.category_id = c.id
+            JOIN brands b ON p.brand_id = b.id
+            JOIN materials m ON p.material_id = m.id
+            WHERE p.category_id = ? AND p.id != ? LIMIT 4
+            """;
+        try (PreparedStatement ps = DBConnect2.getPreparedStatement(sql)) {
+            ps.setInt(1, categoryId);
+            ps.setInt(2, excludeProductId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    result.add(mapProduct(rs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 
     public static void main(String[] args) {
     	ProductDao dao = new ProductDao();

@@ -65,7 +65,7 @@ public class Inventory {
 	public String toString() {
 		return "Product ID: " + this.productID + "\n" +
 				"Initial quantity: " + this.initialQuantity + ", current quantity: " + this.currentQuantity + "\n" +
-				"Status: " + this.reorderStatus;
+				"Status: " + this.reorderStatus + "\n";
 	}
 
 }

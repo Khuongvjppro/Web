@@ -19,16 +19,16 @@
 <header class="bg-dark text-white py-3">
     <div class="container d-flex justify-content-between align-items-center">
         <!-- Logo và Trang chủ -->
-        <a href="${pageContext.request.contextPath}/home" class="text-white">
+        <a href="home.html" class="text-white">
             <h1 class="m-0">Trang chủ</h1>
         </a>
 
         <!-- Menu điều hướng -->
         <div class="menu d-flex">
-            <a href="${pageContext.request.contextPath}/home" class="text-white">Danh mục sản phẩm</a>
-            <a href="${pageContext.request.contextPath}/aboutUs" class="text-white">Giới thiệu</a>
-            <a href="${pageContext.request.contextPath}/policy" class="text-white">Chính sách</a>
-            <a href="${pageContext.request.contextPath}/contactUs" class="text-white">Liên hệ</a>
+            <a href="${pageContext.request.contextPath}/home" class="text-white mx-3">Danh mục sản phẩm</a>
+            <a href="${pageContext.request.contextPath}/aboutUs" class="text-white mx-3">Giới thiệu</a>
+            <a href="${pageContext.request.contextPath}/policy" class="text-white mx-3">Chính sách</a>
+            <a href="${pageContext.request.contextPath}/contactUs" class="text-white mx-3">Liên hệ</a>
         </div>
 
 
@@ -47,6 +47,7 @@
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile">Hồ sơ</a></li>
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
                     <li><a class="dropdown-item" href="${pageContext.request.contextPath}/change-password">Đổi mật khẩu</a></li>
+                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
                 </ul>
             </div>
 
@@ -66,9 +67,13 @@
 
     </div>
 </header>
-<!---Start TaggoAI--->
+
+<!--Bị vô hiệu không còn tồn tại nữa -->
+<!--Giải pháp thay thế tìm 1 thư viện chatbot khác-->
+<!--Start TaggoAI-->
 <script async data-taggo-botid="67e8452738ab1a31880dfc7d" src="https://widget.taggo.chat/v2.js"></script>
-<!---End TaggoAI--->
+<!--End TaggoAI-->
+
 <section id="feature" class="container py-5">
     <div class="row text-center">
         <div class="col-md-2">
@@ -99,17 +104,18 @@
 
 </section>
 
+<c:if test="${not empty sessionScope.username}">
 <section id="product1" class="container py-5">
     <h2 class="text-center">Sản phẩm nổi bật</h2>
     <p class="text-center">Sang trọng – Mạnh mẽ – Khí chất</p>
     <div class="row">
-        <c:forEach var="product" items="${productList}">
+        <c:forEach var="product" items="${products}">
             <div class="col-md-3 mb-4">
                 <div class="card h-100">
                     <!-- Link đến chi tiết sản phẩm -->
                     <a href=" ${pageContext.request.contextPath}/product?pid=${product.id != null ? product.id : 'default'}">
                         <!-- Hình ảnh sản phẩm với kiểm tra dữ liệu -->
-                        <img src="../images/thatlung1.jpg"
+                        <img src="${pageContext.request.contextPath}/images/thatlung1.jpg"
                              class="card-img-top"
                              alt="${product.name != null ? product.name : 'Sản phẩm không có tên'}"
                              style="object-fit: cover; height: 200px; width: 100%;">
@@ -148,13 +154,6 @@
         </c:forEach>
     </div>
 
-
-    <div class="pagination justify-content-center flex-wrap">
-        <!-- Các nút phân trang -->
-        <c:forEach var="i" begin="1" end="${totalPages}">
-            <button class="btn btn-outline-primary mx-1 my-2" onclick="window.location.href='${pageContext.request.contextPath}/home?page=${i}'">${i}</button>
-        </c:forEach>
-    </div>
     <%
         String added = request.getParameter("added");
         if ("success".equals(added)) {
@@ -172,7 +171,22 @@
         }
     %>
 
+    <div class="pagination justify-content-center flex-wrap">
+        <!-- Các nút phân trang -->
+        <c:forEach var="i" begin="1" end="${totalPages}">
+            <button class="btn btn-outline-primary mx-1 my-2" onclick="window.location.href='${pageContext.request.contextPath}/home?page=${i}'">${i}</button>
+        </c:forEach>
+    </div>
+
 </section>
+</c:if>
+
+<!-- Nếu chưa đăng nhập: nhắc người dùng đăng nhập -->
+<c:if test="${empty sessionScope.username}">
+    <div style="text-align:center; padding: 30px;">
+        <h3>Vui lòng <a href="${pageContext.request.contextPath}/login">đăng nhập</a> để xem sản phẩm.</h3>
+    </div>
+</c:if>
 
 <footer class="bg-dark text-white py-4">
     <div class="container">
