@@ -1,12 +1,12 @@
 /**
- * 
+ *
  */
 package com.banthatlung.Dao.model;
 
 import java.io.Serializable;
 
 /**
- * 
+ *
  */
 public class Log implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -15,7 +15,7 @@ public class Log implements Serializable {
 	private int event_type; //1:them du lieu; 2: doc du lieu; 3:sua du lieu; 4:xoa du lieu
 	private String timeStamp;
 	private String description;
-	
+
 	public Log(int id, String accountID, int event_type, String timeStamp, String description) {
 		super();
 		this.id = id;
@@ -67,7 +67,7 @@ public class Log implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ID: " + this.id + ", time: " + this.timeStamp + "\n" + 
+		return "ID: " + this.id + ", time: " + this.timeStamp + "\n" +
 				"User " + this.accountID + " " + this.description;
 	}
 
