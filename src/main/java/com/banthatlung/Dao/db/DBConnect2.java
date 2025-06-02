@@ -12,7 +12,7 @@ import java.util.List;
 public class DBConnect2 {
     static String url = "jdbc:mysql://localhost:3306/shop_that_lung";
     private static final String USER = "root";
-	private static final String PASSWORD = "123456";
+	private static final String PASSWORD = "";
     static Connection conn;
     public static Statement get() {
         try {
