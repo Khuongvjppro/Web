@@ -17,12 +17,12 @@ public class InventoryServlet extends HttpServlet {
             throws ServletException, IOException {
         // Khởi tạo DAO và lấy danh sách báo cáo tồn kho
 		InventoryReportDAO reportDAO = new InventoryReportDAO();
-		List<Inventory> reports = reportDAO.getInventoryReport();
+		List<Inventory> inventories = reportDAO.getInventoryReport();
 
 		// Đưa danh sách báo cáo vào request scope
-		request.setAttribute("reports", reports);
+		request.setAttribute("inventories", inventories);
 
         // Forward request sang JSP hiển thị báo cáo
-        request.getRequestDispatcher(request.getContextPath() + "/admin_Inventory.jsp").forward(request, response);
+        request.getRequestDispatcher("/html_admin/admin_Inventory.jsp").forward(request, response);
     }
 }

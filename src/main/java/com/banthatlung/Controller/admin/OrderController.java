@@ -15,7 +15,8 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/admin_Orders"})
 public class OrderController extends HttpServlet {
-    OrderDao OrderDao = new OrderDao();
+    private static final long serialVersionUID = 1L;
+	OrderDao OrderDao = new OrderDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");

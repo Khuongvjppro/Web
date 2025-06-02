@@ -1,22 +1,21 @@
 package com.banthatlung.Controller.admin;
 
 import java.io.IOException;
+import java.util.List;
+
+import com.banthatlung.Dao.AccountDAO;
+import com.banthatlung.Dao.model.Account;
+
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
-@WebServlet("/admin_dashboard")
+@WebServlet(name = "AdminDashboardServlet", value = "/dashboard")
 public class AdminDashboardServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Kiểm tra quyền admin
-        HttpSession session = request.getSession(false);
-        if (session == null || !"1".equals(session.getAttribute("role"))) {
-            response.sendRedirect("/TTLTW_Project/View/Login.jsp");
-            return;
-        }
-        response.sendRedirect("InventoryServlet");
+        request.getRequestDispatcher("/html_admin/admin_Disboard.jsp").forward(request, response);
     }
 }
 
