@@ -7,26 +7,26 @@ public class Order {
     private String address;
     private String orderDate;
     private String update_date;
-    private int Status;
+    private String status;
     private int total_amount;
 
-    public Order(int id, String name, String phone, String address, String orderDate, String update_date, int status, int total_amount) {
+    public Order(int id, String name, String phone, String address, String orderDate, String update_date, String status, int total_amount) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.orderDate = orderDate;
         this.update_date = update_date;
-        Status = status;
+        this.status = status;
         this.total_amount = total_amount;
     }
 
-    public Order(int id, String name, String phone, String address, int status, int total_amount) {
+    public Order(int id, String name, String phone, String address, String status, int total_amount) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.address = address;
-        Status = status;
+        this.status = status;
         this.total_amount = total_amount;
     }
 
@@ -93,12 +93,12 @@ public class Order {
         this.update_date = update_date;
     }
 
-    public int getStatus() {
-        return Status;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatus(int status) {
-        Status = status;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getTotal_amount() {
