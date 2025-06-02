@@ -12,6 +12,9 @@
   <style><%@include file="../asset/css/style.css"%></style>
   <style><%@include file="../asset/css/custom.css"%></style>
   <style><%@include file="../asset/css/bootstrap.css"%></style>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 	<style>
         table {
@@ -57,27 +60,35 @@
 
 
         <li>
-          <a href="admin_Disboard.jsp"><i class="fa fa-desktop "></i>Dashboard</a>
+          <a href="${pageContext.request.contextPath}/dashboard"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
-          <a href="admin_user.jsp" ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+          <a href="${pageContext.request.contextPath}/html_admin/admin_user.jsp" ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
         </li>
         <li>
-          <a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
+          <a href="${pageContext.request.contextPath}/admin_Products"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
         </li>
         <li>
-          <a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
+          <a href="${pageContext.request.contextPath}/admin_Orders" ><i class="fa fa-qrcode "></i>ORDERS</a>
         </li>
         <li>
-          <a href="admin_Categories.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
+          <a href="${pageContext.request.contextPath}/admin_Categories"><i class="fa fa-bar-chart-o"></i>Category</a>
+        </li>
+       	<li>
+     		<a href="${pageContext.request.contextPath}/admin_Brands" class="fa fa-bar-chart-o"><i class="fa fa-edit "></i>Brands</a>
         </li>
         <li>
-          <a href="admin_Inventory.jsp" class="active-link"><i class="fa fa-table"></i>Inventory</a>
+        	<a href="${pageContext.request.contextPath}/admin_Materials"><i class="fa fa-edit "></i>Materials</a>
         </li>
         <li>
-          <a href="saleReport.jsp"><i class="fa fa-table"></i>Sale report</a>
+          <a href="${pageContext.request.contextPath}/admin_Inventory" class="active-link"><i class="fa fa-table"></i>Inventory</a>
         </li>
-
+        <li>
+          <a href="${pageContext.request.contextPath}/html_admin/saleReport.jsp"><i class="fa fa-table"></i>Sale report</a>
+        </li>
+		<li>
+            <a href="${pageContext.request.contextPath}/html_admin/Log.jsp"><i class="fa fa-table"></i>Log</a>
+        </li>
       </ul>
     </div>
 
@@ -85,7 +96,7 @@
   <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
     <div id="page-inner">
-        <h2 style="text-align:center;">Báo cáo tồn kho sản phẩm</h2>
+    	<h2 style="text-align:center;">Báo cáo tồn kho sản phẩm</h2>
 	    <!-- Hiển thị thông báo lỗi nếu có -->
         <c:if test="${not empty errorMessage}">
             <div style="color: red; text-align: center;">
@@ -94,7 +105,7 @@
         </c:if>
     
         <!-- Kiểm tra có lấy được dữ liệu tồn kho không -->
-        <c:if test="${empty reports}">
+        <c:if test="${empty inventories}">
     	    <p style="color:red;text-align:center;">Không có dữ liệu tồn kho để hiển thị.</p>
 	    </c:if>
     
@@ -109,18 +120,18 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="report" var="reports">
+                <c:forEach var="inventory" items="${inventories}" >
                     <tr>
-                        <td>${report.getProductID()}</td>
-                        <td>${report.getInitialQuantity()}</td>
-                        <td>${report.getCurrentQuantity()}</td>
-                        <td>${report.getReorderStatus()}</td>
+                        <td>${inventory.getProductID()}</td>
+                        <td>${inventory.getInitialQuantity()}</td>
+                        <td>${inventory.getCurrentQuantity()}</td>
+                        <td>${inventory.getReorderStatus()}</td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-    </div>
-    </div>
+    	</div>
+	</div>
 </div>
 </body>
 </html>

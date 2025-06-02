@@ -48,27 +48,35 @@
 
 
         <li>
-          <a href="admin_Disboard.jsp" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
+          <a href="${pageContext.request.contextPath}/dashboard" class="active-link"><i class="fa fa-desktop "></i>Dashboard</a>
         </li>
         <li>
-          <a href="admin_user.jsp" ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
+          <a href="${pageContext.request.contextPath}/html_admin/admin_user.jsp" ><i class="fa fa-table "></i>USER<span class="badge"></span></a>
         </li>
         <li>
-          <a href="admin_Products.jsp"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
+          <a href="${pageContext.request.contextPath}/admin_Products"><i class="fa fa-edit "></i>PRODUCT<span></span></a>
         </li>
         <li>
-          <a href="admin_Orders.jsp" ><i class="fa fa-qrcode "></i>ORDERS</a>
+          <a href="${pageContext.request.contextPath}/admin_Orders" ><i class="fa fa-qrcode "></i>ORDERS</a>
         </li>
         <li>
-          <a href="admin_Categories.jsp"><i class="fa fa-bar-chart-o"></i>Category</a>
+          <a href="${pageContext.request.contextPath}/admin_Categories"><i class="fa fa-bar-chart-o"></i>Category</a>
         </li>
         <li>
-          <a href="admin_Inventory.jsp"><i class="fa fa-table"></i>Inventory</a>
+			<a href="${pageContext.request.contextPath}/admin_Brands"><i class="fa fa-edit "></i>Brands</a>
+        </li>
+		<li>
+    		<a href="${pageContext.request.contextPath}/admin_Materials"><i class="fa fa-edit "></i>Materials</a>
+       	</li>
+        <li>
+          <a href="${pageContext.request.contextPath}/admin_Inventory"><i class="fa fa-table"></i>Inventory</a>
         </li>
         <li>
-          <a href="saleReport.jsp"><i class="fa fa-table"></i>Sale report</a>
+          <a href="${pageContext.request.contextPath}/html_admin/saleReport.jsp"><i class="fa fa-table"></i>Sale report</a>
         </li>
-
+        <li>
+            <a href="${pageContext.request.contextPath}/html_admin/Log.jsp"><i class="fa fa-table"></i>Log</a>
+        </li>
       </ul>
     </div>
 
