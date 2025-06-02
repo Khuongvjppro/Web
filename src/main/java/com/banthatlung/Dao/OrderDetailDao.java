@@ -60,7 +60,7 @@ public class OrderDetailDao {
             con = new DBConnect().getConnection();
             ps = con.prepareStatement(sql);
             ps.setInt(1, order.getId());
-            ps.setInt(2, order.getStatus());
+            ps.setString(2, order.getStatus());
             ps.setInt(3, order.getTotal_amount());
             ps.setInt(4, order.getId());
             int rowsUpdated = ps.executeUpdate();

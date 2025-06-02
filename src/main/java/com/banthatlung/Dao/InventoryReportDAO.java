@@ -112,6 +112,5 @@ public class InventoryReportDAO {
 		InventoryReportDAO dao = new InventoryReportDAO();
 		
 		System.out.println(dao.getInventoryReport());
-		System.out.println(dao.getQuarterlyReport(2025, 1));
 	}
 }
