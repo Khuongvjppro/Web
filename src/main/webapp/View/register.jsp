@@ -78,7 +78,7 @@
 
   <form action="${pageContext.request.contextPath}/register" method="post">
     <label for="fullname">Họ và tên</label>
-    <input type="text" id="fullname" name="fullname" required>
+    <input type="text" id="username" name="username" required>
 
     <label for="email">Email</label>
     <input type="email" id="email" name="email" required>
@@ -87,7 +87,7 @@
     <input type="password" id="password" name="password" required>
 
     <label for="confirmPassword">Xác nhận mật khẩu</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" required>
+    <input type="password" id="cpassword" name="cpassword" required>
 
     <button type="submit" class="btn">Đăng ký</button>
   </form>

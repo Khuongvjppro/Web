@@ -11,7 +11,7 @@ public class DBConnect {
             throw new RuntimeException(e);
         }
         return con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/shop_that_lung", "root", "");
+                "jdbc:mysql://localhost:3306/shop_that_lung", "root", "123456");
     }
     public static void main(String arg[]) throws SQLException, ClassNotFoundException {
          DBConnect db = new DBConnect();

@@ -93,8 +93,7 @@
              style="width: 20px; height: 20px; margin-right: 10px;">
         Đăng nhập với Google
     </a>
-
-	<a href="https://www.facebook.com/v22.0/dialog/oauth?client_id=1002836298038356&redirect_uri=http://localhost:8080/projectl/login"
+    <a href="https://www.facebook.com/v22.0/dialog/oauth?client_id=1002836298038356&redirect_uri=http://localhost:8080/projectl/login"
        style="display: flex; justify-content: center; align-items: center;
    margin-top: 15px; padding: 10px; background-color: #1877F2;
    color: #fff; text-decoration: none;

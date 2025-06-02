@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.banthatlung.Controller.PasswordUtils;
 import com.banthatlung.Dao.db.DBConnect2;
 import com.banthatlung.Dao.model.Account;
 import com.banthatlung.Dao.model.User;
@@ -98,20 +99,16 @@ public class AccountDAO {
         }
         return false;
     }
-    
-    public boolean login(String username, String password) {
-    	String sql = "SELECT * FROM accounts WHERE username = ? AND password = ?";
-    	try (PreparedStatement stmt = DBConnect2.getPreparedStatement(sql)) {
-    		stmt.setString(1, username);
-    		stmt.setString(2, password);
-    		ResultSet rs = stmt.executeQuery();
-    		return rs.next();
-    	} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
+
+    public boolean login(String username, String rawPassword) {
+        Account account = findAccount(username);
+        if (account == null) return false;
+
+        String hashedInput = PasswordUtils.encryptPassword(rawPassword);
+        return hashedInput.equals(account.getPass());
     }
-    
+
+
     // Tìm người dùng theo tên đăng nhập
     public Account findAccount(String username) {
         String sql = "SELECT * FROM accounts WHERE username = ?";
